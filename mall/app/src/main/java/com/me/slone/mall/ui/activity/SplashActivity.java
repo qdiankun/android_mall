@@ -1,17 +1,14 @@
 package com.me.slone.mall.ui.activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.os.Bundle;
 import android.view.View;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.gyf.immersionbar.BarHide;
 import com.gyf.immersionbar.ImmersionBar;
-import com.hjq.http.EasyHttp;
 import com.me.slone.mall.R;
 import com.me.slone.mall.common.MyActivity;
 import com.me.slone.mall.other.AppConfig;
@@ -29,7 +26,7 @@ public class SplashActivity extends MyActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_splash;
+        return R.layout.splash_activity;
     }
 
     @Override
