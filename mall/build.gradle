@@ -2,13 +2,14 @@
 buildscript {
     repositories {
         google()
+        maven{ url'https://maven.aliyun.com/nexus/content/groups/public/' }
+        maven{ url'https://maven.aliyun.com/nexus/content/repositories/jcenter'}
         jcenter()
     }
     dependencies {
         classpath "com.android.tools.build:gradle:4.0.0"
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        // 资源混淆插件：https://github.com/shwenzhang/AndResGuard
+        classpath 'com.tencent.mm:AndResGuard-gradle-plugin:1.2.17'
     }
 }
 
@@ -16,8 +17,8 @@ allprojects {
     repositories {
         google()
         jcenter()
-
         maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven { url 'https://jitpack.io' }
     }
 }
 

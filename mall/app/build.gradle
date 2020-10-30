@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 apply from: '../config.gradle'
+//apply from: 'proguard.gradle'
 
 android {
-
 
     defaultConfig {
 
@@ -84,5 +84,68 @@ android {
 }
 
 dependencies {
+    // 基类库
+    implementation project(':base')
+    // 自定义 View
+    implementation project(':widget')
+    // 友盟封装
+    implementation project(':umeng')
 
+    // 网络请求框架：https://github.com/getActivity/EasyHttp
+    implementation 'com.hjq:http:6.9'
+
+    // 权限请求框架：https://github.com/getActivity/XXPermissions
+    implementation 'com.hjq:xxpermissions:6.5'
+
+    // 标题栏框架：https://github.com/getActivity/TitleBar
+    implementation 'com.hjq:titlebar:6.5'
+
+    // 吐司框架：https://github.com/getActivity/ToastUtils
+    implementation 'com.hjq:toast:8.6'
+
+    // OkHttp 框架：https://github.com/square/okhttp
+    implementation 'com.squareup.okhttp3:okhttp:4.2.2'
+
+    // JSON 解析框架：https://github.com/google/gson
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    // AOP 插件库：https://mvnrepository.com/artifact/org.aspectj/aspectjrt
+    implementation 'org.aspectj:aspectjrt:1.9.5'
+
+    // 图片加载框架：https://github.com/bumptech/glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.3'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+
+    // 状态栏沉浸：https://github.com/gyf-dev/ImmersionBar
+    implementation 'com.gyf.immersionbar:immersionbar:3.0.0'
+
+    // 手势 ImageView：https://github.com/chrisbanes/PhotoView
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+    // ViewPager 指示器：https://github.com/romandanylyk/PageIndicatorView
+    implementation 'com.romandanylyk:pageindicatorview:1.0.3'
+
+    // Bugly 异常捕捉：https://bugly.qq.com/docs/user-guide/instruction-manual-android/?v=20190418140644
+    implementation 'com.tencent.bugly:crashreport:3.1.9'
+    implementation 'com.tencent.bugly:nativecrashreport:3.7.1'
+
+    // 动画解析库：https://github.com/airbnb/lottie-android
+    // 动画资源：https://lottiefiles.com、https://icons8.com/animated-icons
+    implementation 'com.airbnb.android:lottie:3.4.1'
+
+    // 上拉刷新下拉加载：https://github.com/scwang90/SmartRefreshLayout
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
+    // SmartRefreshLayout 刷新样式集合库
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.2'
+
+    // 侧滑框架：https://github.com/luckybilly/SmartSwipe
+    implementation 'com.billy.android:smart-swipe:1.1.2'
+    implementation 'com.billy.android:smart-swipe-x:1.1.0'
+
+    // 日志调试：https://github.com/getActivity/Logcat
+    debugImplementation 'com.hjq:logcat:8.2'
+
+    // 内存泄漏：https://github.com/square/leakcanary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
 }
