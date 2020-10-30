@@ -7,7 +7,6 @@
     android:orientation="vertical"
     tools:context=".ui.activity.HomeActivity">
 
-
     <com.hjq.widget.layout.NoScrollViewPager
         android:id="@+id/vp_home_pager"
         android:layout_width="match_parent"
@@ -21,7 +20,7 @@
         android:paddingTop="5dp"
         android:background="@color/white"
         app:labelVisibilityMode="labeled"
+        app:itemBackground="@null"
         app:menu="@menu/menu_home_bottom_nav"
-        app:itemTextAppearanceActive="@style/bottom_selected_text"
-        app:itemTextAppearanceInactive="@style/bottom_normal_text" />
+        />
 </LinearLayout>
