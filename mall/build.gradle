@@ -24,3 +24,10 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+
+ext{
+
+    //dependency
+    design = '1.3.0-alpha01'
+}
