@@ -10,6 +10,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:backButton="false"
-        app:title="@string/home_nav_index" />
+        app:title="@string/home_nav_index"
+        app:background="@color/white"/>
+
+    <com.ms.banner.Banner
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/banner"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:indicator_height="4dp"
+        app:indicator_margin="4dp"
+        app:indicator_width="8dp" />
+
 
 </LinearLayout>

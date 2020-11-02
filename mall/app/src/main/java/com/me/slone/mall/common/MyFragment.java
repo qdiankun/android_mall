@@ -138,7 +138,7 @@ public abstract class MyFragment<A extends MyActivity> extends BaseFragment<A>
     @Override
     public void onSucceed(Object result) {
         if (result instanceof HttpData) {
-            toast(((HttpData) result).getMessage());
+            toast(((HttpData) result).getErrmsg());
         }
     }
 

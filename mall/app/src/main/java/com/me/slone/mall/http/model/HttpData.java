@@ -9,18 +9,18 @@ package com.me.slone.mall.http.model;
 public class HttpData<T> {
 
     /** 返回码 */
-    private int code;
+    private int errno;
     /** 提示语 */
-    private String msg;
+    private String errmsg;
     /** 数据 */
     private T data;
 
-    public int getCode() {
-        return code;
+    public int getErrno() {
+        return errno;
     }
 
-    public String getMessage() {
-        return msg;
+    public String getErrmsg() {
+        return errmsg;
     }
 
     public T getData() {
