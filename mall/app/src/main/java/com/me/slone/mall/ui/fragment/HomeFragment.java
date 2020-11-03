@@ -14,14 +14,22 @@ import com.me.slone.mall.common.MyFragment;
 import com.me.slone.mall.http.model.HttpData;
 import com.me.slone.mall.http.request.HomeApi;
 import com.me.slone.mall.http.response.goods.BannerBean;
+import com.me.slone.mall.http.response.goods.BrandBean;
 import com.me.slone.mall.http.response.goods.ChannelBean;
 import com.me.slone.mall.http.response.goods.CouponBean;
+import com.me.slone.mall.http.response.goods.GroupBean;
 import com.me.slone.mall.http.response.goods.HomeGoodsBean;
+import com.me.slone.mall.http.response.goods.NewGoodsBean;
+import com.me.slone.mall.other.DividerGridItemDecoration;
 import com.me.slone.mall.other.GridSpaceDecoration;
+import com.me.slone.mall.other.SimpleDividerDecoration;
 import com.me.slone.mall.ui.activity.HomeActivity;
+import com.me.slone.mall.ui.adapter.BrandAdapter;
 import com.me.slone.mall.ui.adapter.ChannelAdapter;
 import com.me.slone.mall.ui.adapter.CouponAdapter;
+import com.me.slone.mall.ui.adapter.GroupAdapter;
 import com.me.slone.mall.ui.adapter.MallViewHolder;
+import com.me.slone.mall.ui.adapter.NewGoodsAdapter;
 import com.ms.banner.Banner;
 import com.ms.banner.BannerConfig;
 
@@ -43,6 +51,19 @@ public class HomeFragment extends MyFragment<HomeActivity> {
     private RecyclerView mCouponRv;
     private CouponAdapter mCouponAdapter;
     private List<CouponBean> mCouponList = new ArrayList<>();
+    //group
+    private RecyclerView mGroupRv;
+    private GroupAdapter mGroupAdapter;
+    private List<GroupBean> mGroupList = new ArrayList<>();
+    //newgoods;
+    private RecyclerView mNewGoodsRv;
+    private NewGoodsAdapter mNewGoodsAdapter;
+    private List<NewGoodsBean> mNewGoodsList = new ArrayList<>();
+    //brands
+    private RecyclerView mBrandsRv;
+    private BrandAdapter mBrandAdapter;
+    private List<BrandBean> mBrandList = new ArrayList<>();
+
 
 
     public static HomeFragment newInstance() {
@@ -68,6 +89,7 @@ public class HomeFragment extends MyFragment<HomeActivity> {
                 ToastUtils.show(mChannelList.get(position).getName());
             }
         });
+        //coupon
         mChannelRv.setAdapter(mChannelAdapter);
         mCouponRv = findViewById(R.id.rv_coupon);
         mCouponAdapter = new CouponAdapter(getContext());
@@ -75,11 +97,51 @@ public class HomeFragment extends MyFragment<HomeActivity> {
         mCouponAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-
+                ToastUtils.show(mCouponList.get(position).getName());
             }
         });
         mCouponRv.addItemDecoration(new GridSpaceDecoration(getContext()));
         mCouponRv.setAdapter(mCouponAdapter);
+        //groups
+        mGroupRv = findViewById(R.id.rv_group);
+        mGroupAdapter = new GroupAdapter(getContext());
+        mGroupAdapter.setData(mGroupList);
+        mGroupAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
+
+            }
+        });
+        mGroupRv.addItemDecoration(new SimpleDividerDecoration(getContext()));
+        mGroupRv.setAdapter(mGroupAdapter);
+        //newgoods
+        mNewGoodsRv = findViewById(R.id.rv_newgoods);
+        GridLayoutManager newGoodsManager = new GridLayoutManager(getContext(),2);
+        mNewGoodsRv.setLayoutManager(newGoodsManager);
+        mNewGoodsAdapter = new NewGoodsAdapter(getContext());
+        mNewGoodsAdapter.setData(mNewGoodsList);
+        mNewGoodsAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
+
+            }
+        });
+        mNewGoodsRv.addItemDecoration(new GridSpaceDecoration(getContext()));
+        mNewGoodsRv.setAdapter(mNewGoodsAdapter);
+        //brand
+        mBrandsRv = findViewById(R.id.rv_brands);
+        GridLayoutManager brandManager = new GridLayoutManager(getContext(),2);
+        mBrandsRv.setLayoutManager(brandManager);
+        mBrandAdapter = new BrandAdapter(getContext());
+        mBrandAdapter.setData(mBrandList);
+        mBrandAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
+
+            }
+        });
+        mBrandsRv.addItemDecoration(new DividerGridItemDecoration(getContext()));
+        mBrandsRv.setAdapter(mBrandAdapter);
     }
 
     @Override
@@ -97,8 +159,38 @@ public class HomeFragment extends MyFragment<HomeActivity> {
                         refreshBaner(result.getData().getBanner());
                         refreshChannel(result.getData().getChannel());
                         refreshCoupon(result.getData().getCouponList());
+                        refreshGroup(result.getData().getGrouponList());
+                        refreshNewGoods(result.getData().getNewGoodsList());
+                        refreshBrands(result.getData().getBrandList());
                     }
                 });
+    }
+
+    private void refreshBrands(List<BrandBean> brandList) {
+        if(brandList == null || brandList.isEmpty()){
+            return;
+        }
+        mBrandList.clear();
+        mBrandList.addAll(brandList);
+        mBrandAdapter.notifyDataSetChanged();
+    }
+
+    private void refreshNewGoods(List<NewGoodsBean> newGoodsList) {
+        if(newGoodsList == null || newGoodsList.isEmpty()){
+            return;
+        }
+        mNewGoodsList.clear();
+        mNewGoodsList.addAll(newGoodsList);
+        mNewGoodsAdapter.notifyDataSetChanged();
+    }
+
+    private void refreshGroup(List<GroupBean> grouponList) {
+        if(grouponList == null || grouponList.isEmpty()){
+            return;
+        }
+        mGroupList.clear();
+        mGroupList.addAll(grouponList);
+        mGroupAdapter.notifyDataSetChanged();
     }
 
     private void refreshCoupon(List<CouponBean> couponList) {

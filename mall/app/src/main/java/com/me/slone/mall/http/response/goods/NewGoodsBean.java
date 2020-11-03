@@ -5,7 +5,7 @@ package com.me.slone.mall.http.response.goods;
  * Time：20-11-2 上午11:20
  * Description:
  */
-public class GoodsBean {
+public class NewGoodsBean {
 
     /**
      * "id": 1116011,

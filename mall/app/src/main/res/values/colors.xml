@@ -14,4 +14,9 @@
     <!--颜色可以自定义-->
     <color name="font_hint">#4DECAF</color>
 
+    <!-- -->
+    <color name="coupon_start">#D2A36E</color>
+    <color name="coupon_center">#DEB076</color>
+    <color name="coupon_end">#E8BC7F</color>
+
 </resources>

@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class HomeGoodsBean {
 
-    private List<GoodsBean> newGoodsList;
+    private List<NewGoodsBean> newGoodsList;
     private List<CouponBean> couponList;
     private List<ChannelBean> channel;
     private List<GroupBean> grouponList;
@@ -19,7 +19,7 @@ public class HomeGoodsBean {
     private List<TopicBean> topicList;
     private List<FloorGoodsBean> floorGoodsList;
 
-    public void setNewGoodsList(List<GoodsBean> newGoodsList) {
+    public void setNewGoodsList(List<NewGoodsBean> newGoodsList) {
         this.newGoodsList = newGoodsList;
     }
 
@@ -55,7 +55,7 @@ public class HomeGoodsBean {
         this.floorGoodsList = floorGoodsList;
     }
 
-    public List<GoodsBean> getNewGoodsList() {
+    public List<NewGoodsBean> getNewGoodsList() {
         return newGoodsList;
     }
 

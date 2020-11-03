@@ -10,13 +10,13 @@ import java.util.List;
 public class FloorGoodsBean {
 
     private String name;
-    private List<GoodsBean> goodsList;
+    private List<NewGoodsBean> goodsList;
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setGoodsList(List<GoodsBean> goodsList) {
+    public void setGoodsList(List<NewGoodsBean> goodsList) {
         this.goodsList = goodsList;
     }
 
@@ -24,7 +24,7 @@ public class FloorGoodsBean {
         return name;
     }
 
-    public List<GoodsBean> getGoodsList() {
+    public List<NewGoodsBean> getGoodsList() {
         return goodsList;
     }
 }

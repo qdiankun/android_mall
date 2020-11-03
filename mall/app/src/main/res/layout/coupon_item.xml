@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="150dp"
+    android:layout_height="135dp"
     android:layout_margin="5dp"
     android:background="@drawable/coupon_bg"
     xmlns:tools="http://schemas.android.com/tools"
@@ -19,7 +19,7 @@
         android:paddingRight="8dp"
         android:paddingTop="3dp"
         android:paddingBottom="3dp"
-        android:textSize="@dimen/dimen_12"
+        android:textSize="@dimen/text_12"
         android:textStyle="bold"
         tools:text="无限制"/>
 
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/red"
                 android:textStyle="bold"
-                android:textSize="@dimen/dimen_24"
+                android:textSize="@dimen/text_24"
                 tools:text="10元"/>
 
             <TextView
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
-                android:textSize="@dimen/dimen_22"
+                android:textSize="@dimen/text_22"
                 tools:text="满99元使用"/>
 
 
@@ -70,7 +70,7 @@
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/dimen_24"
+                android:textSize="@dimen/text_24"
                 android:textColor="@color/white"
                 tools:text="限时满减券"/>
 
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/white"
-                android:textSize="@dimen/dimen_12"
+                android:textSize="@dimen/text_12"
                 tools:text="有效期:2020-11-01 00:00:00 - 2020-11-11 24:24:59"/>
 
         </LinearLayout>
@@ -101,7 +101,7 @@
             android:textColor="@color/white"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
-            android:textSize="@dimen/dimen_14"
+            android:textSize="@dimen/text_14"
             tools:text="全场通用"
             />
 
