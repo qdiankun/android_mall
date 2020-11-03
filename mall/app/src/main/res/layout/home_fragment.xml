@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    >
+    android:background="@color/black5"
+    android:orientation="vertical">
 
     <com.hjq.bar.TitleBar
         android:layout_width="match_parent"
@@ -13,14 +13,60 @@
         app:title="@string/home_nav_index"
         app:background="@color/white"/>
 
-    <com.ms.banner.Banner
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/banner"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:indicator_height="4dp"
-        app:indicator_margin="4dp"
-        app:indicator_width="8dp" />
+        android:layout_height="match_parent">
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.ms.banner.Banner
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:indicator_height="10dp"
+                app:indicator_width="10dp"
+                app:indicator_margin="5dp"
+                app:indicator_padding="5dp"
+                 />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_channel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:gravity="center"
+                    android:text="优惠券"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_coupon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
+

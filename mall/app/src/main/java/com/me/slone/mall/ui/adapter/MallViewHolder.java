@@ -1,11 +1,10 @@
 package com.me.slone.mall.ui.adapter;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.me.slone.mall.R;
 import com.me.slone.mall.http.glide.GlideApp;
 import com.me.slone.mall.http.response.goods.BannerBean;
 import com.ms.banner.holder.BannerViewHolder;
@@ -17,20 +16,19 @@ import com.ms.banner.holder.BannerViewHolder;
  */
 public class MallViewHolder implements BannerViewHolder<BannerBean> {
 
-    private Context context;
-
-    public MallViewHolder(Context context) {
-        this.context = context;
-    }
-
     @Override
     public View createView(Context context, int position, BannerBean banner) {
-        View view = LayoutInflater.from(context).inflate(R.layout.banner_item, null);
-        ImageView imageView = view.findViewById(R.id.id_banner);
+        // 返回mImageView页面布局
+        ImageView imageView = new ImageView(context);
+        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT
+        );
+        imageView.setLayoutParams(params);
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         GlideApp.with(context)
                 .load(banner.getUrl())
                 .into(imageView);
-        return view;
+        return imageView;
     }
 
 }
