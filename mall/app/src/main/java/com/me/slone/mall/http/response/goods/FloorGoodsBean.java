@@ -11,6 +11,7 @@ public class FloorGoodsBean {
 
     private String name;
     private List<NewGoodsBean> goodsList;
+    private int id;
 
     public void setName(String name) {
         this.name = name;
@@ -26,5 +27,13 @@ public class FloorGoodsBean {
 
     public List<NewGoodsBean> getGoodsList() {
         return goodsList;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
     }
 }

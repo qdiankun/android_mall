@@ -1,7 +1,12 @@
 package com.me.slone.mall.ui.fragment;
 
 import android.graphics.drawable.Drawable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +17,7 @@ import com.hjq.http.listener.HttpCallback;
 import com.hjq.toast.ToastUtils;
 import com.me.slone.mall.R;
 import com.me.slone.mall.common.MyFragment;
+import com.me.slone.mall.http.glide.GlideApp;
 import com.me.slone.mall.http.model.HttpData;
 import com.me.slone.mall.http.request.HomeApi;
 import com.me.slone.mall.http.response.goods.BannerBean;
@@ -22,6 +28,7 @@ import com.me.slone.mall.http.response.goods.GroupBean;
 import com.me.slone.mall.http.response.goods.HomeGoodsBean;
 import com.me.slone.mall.http.response.goods.HotGoodsBean;
 import com.me.slone.mall.http.response.goods.NewGoodsBean;
+import com.me.slone.mall.http.response.goods.TopicBean;
 import com.me.slone.mall.other.DividerGridItemDecoration;
 import com.me.slone.mall.other.DividerItemDecoration;
 import com.me.slone.mall.other.GridSpaceDecoration;
@@ -33,6 +40,7 @@ import com.me.slone.mall.ui.adapter.GroupAdapter;
 import com.me.slone.mall.ui.adapter.HotGoodsAdapter;
 import com.me.slone.mall.ui.adapter.MallViewHolder;
 import com.me.slone.mall.ui.adapter.NewGoodsAdapter;
+import com.me.slone.mall.utils.DisplayUtil;
 import com.ms.banner.Banner;
 import com.ms.banner.BannerConfig;
 
@@ -70,7 +78,8 @@ public class HomeFragment extends MyFragment<HomeActivity> {
     private RecyclerView mHotGoodsRv;
     private HotGoodsAdapter mHotGoodsAdapter;
     private List<HotGoodsBean> mHotGoodsList = new ArrayList<>();
-
+    //topics
+    private LinearLayout topLl;
 
 
     public static HomeFragment newInstance() {
@@ -86,7 +95,7 @@ public class HomeFragment extends MyFragment<HomeActivity> {
     protected void initView() {
         mBanner = findViewById(R.id.banner);
         mChannelRv = findViewById(R.id.rv_channel);
-        GridLayoutManager layoutManager = new GridLayoutManager(getContext(),5);
+        GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 5);
         mChannelRv.setLayoutManager(layoutManager);
         mChannelAdapter = new ChannelAdapter(getContext());
         mChannelAdapter.setData(mChannelList);
@@ -123,7 +132,7 @@ public class HomeFragment extends MyFragment<HomeActivity> {
         mGroupRv.setAdapter(mGroupAdapter);
         //newgoods
         mNewGoodsRv = findViewById(R.id.rv_newgoods);
-        GridLayoutManager newGoodsManager = new GridLayoutManager(getContext(),2);
+        GridLayoutManager newGoodsManager = new GridLayoutManager(getContext(), 2);
         mNewGoodsRv.setLayoutManager(newGoodsManager);
         mNewGoodsAdapter = new NewGoodsAdapter(getContext());
         mNewGoodsAdapter.setData(mNewGoodsList);
@@ -137,7 +146,7 @@ public class HomeFragment extends MyFragment<HomeActivity> {
         mNewGoodsRv.setAdapter(mNewGoodsAdapter);
         //brand
         mBrandsRv = findViewById(R.id.rv_brands);
-        GridLayoutManager brandManager = new GridLayoutManager(getContext(),2);
+        GridLayoutManager brandManager = new GridLayoutManager(getContext(), 2);
         mBrandsRv.setLayoutManager(brandManager);
         mBrandAdapter = new BrandAdapter(getContext());
         mBrandAdapter.setData(mBrandList);
@@ -162,16 +171,19 @@ public class HomeFragment extends MyFragment<HomeActivity> {
         });
         mHotGoodsRv.addItemDecoration(getVerticalGrayDividerItem());
         mHotGoodsRv.setAdapter(mHotGoodsAdapter);
+
+        topLl = findViewById(R.id.ll_topics);
+
     }
 
-    private DividerItemDecoration getVerticalGrayDividerItem(){
+    private DividerItemDecoration getVerticalGrayDividerItem() {
         Drawable verticalLine = getResources().getDrawable(R.drawable.divider_vertical_bg);
-        return  new DividerItemDecoration(DividerItemDecoration.VERTICAL_LIST,verticalLine);
+        return new DividerItemDecoration(DividerItemDecoration.VERTICAL_LIST, verticalLine);
     }
 
-    private DividerItemDecoration getVerticalWhiteDividerItem(){
+    private DividerItemDecoration getVerticalWhiteDividerItem() {
         Drawable verticalLine = getResources().getDrawable(R.drawable.divider_vertical_white_bg);
-        return  new DividerItemDecoration(DividerItemDecoration.VERTICAL_LIST,verticalLine);
+        return new DividerItemDecoration(DividerItemDecoration.VERTICAL_LIST, verticalLine);
     }
 
     @Override
@@ -182,7 +194,7 @@ public class HomeFragment extends MyFragment<HomeActivity> {
     private void getHomeData() {
         EasyHttp.get(this)
                 .api(new HomeApi())
-                .request(new HttpCallback<HttpData<HomeGoodsBean>>(this){
+                .request(new HttpCallback<HttpData<HomeGoodsBean>>(this) {
                     @Override
                     public void onSucceed(HttpData<HomeGoodsBean> result) {
                         super.onSucceed(result);
@@ -193,12 +205,38 @@ public class HomeFragment extends MyFragment<HomeActivity> {
                         refreshNewGoods(result.getData().getNewGoodsList());
                         refreshBrands(result.getData().getBrandList());
                         refreshHotGoods(result.getData().getHotGoodsList());
+                        refreshTopics(result.getData().getTopicList());
                     }
                 });
     }
 
+    private void refreshTopics(List<TopicBean> topicList) {
+        if (topicList == null || topicList.isEmpty()) {
+            return;
+        }
+        for (TopicBean topicBean : topicList) {
+            View view = LayoutInflater.from(getContext()).inflate(R.layout.topic_item, null);
+            ImageView goodIv = view.findViewById(R.id.iv_goods);
+            TextView nameTv = view.findViewById(R.id.tv_name);
+            TextView priceTv = view.findViewById(R.id.tv_price);
+            TextView subTitleTv = view.findViewById(R.id.tv_subtitle);
+            GlideApp.with(getContext())
+                    .load(topicBean.getPicUrl())
+                    .into(goodIv);
+            nameTv.setText(topicBean.getTitle());
+            priceTv.setText("¥ "+topicBean.getPrice());
+            subTitleTv.setText(topicBean.getSubtitle());
+            view.setOnClickListener(view1 -> {
+                ToastUtils.show(topicBean.getTitle());
+            });
+            int width = DisplayUtil.getScreenContentWidth(getContext()) - 50;
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
+            topLl.addView(view,params);
+        }
+    }
+
     private void refreshHotGoods(List<HotGoodsBean> hotGoodsList) {
-        if(hotGoodsList == null || hotGoodsList.isEmpty()){
+        if (hotGoodsList == null || hotGoodsList.isEmpty()) {
             return;
         }
         mHotGoodsList.clear();
@@ -207,7 +245,7 @@ public class HomeFragment extends MyFragment<HomeActivity> {
     }
 
     private void refreshBrands(List<BrandBean> brandList) {
-        if(brandList == null || brandList.isEmpty()){
+        if (brandList == null || brandList.isEmpty()) {
             return;
         }
         mBrandList.clear();
@@ -216,7 +254,7 @@ public class HomeFragment extends MyFragment<HomeActivity> {
     }
 
     private void refreshNewGoods(List<NewGoodsBean> newGoodsList) {
-        if(newGoodsList == null || newGoodsList.isEmpty()){
+        if (newGoodsList == null || newGoodsList.isEmpty()) {
             return;
         }
         mNewGoodsList.clear();
@@ -225,7 +263,7 @@ public class HomeFragment extends MyFragment<HomeActivity> {
     }
 
     private void refreshGroup(List<GroupBean> grouponList) {
-        if(grouponList == null || grouponList.isEmpty()){
+        if (grouponList == null || grouponList.isEmpty()) {
             return;
         }
         mGroupList.clear();
@@ -234,7 +272,7 @@ public class HomeFragment extends MyFragment<HomeActivity> {
     }
 
     private void refreshCoupon(List<CouponBean> couponList) {
-        if(couponList == null || couponList.isEmpty()){
+        if (couponList == null || couponList.isEmpty()) {
             return;
         }
         mCouponList.clear();
@@ -243,17 +281,18 @@ public class HomeFragment extends MyFragment<HomeActivity> {
     }
 
     private void refreshChannel(List<ChannelBean> channel) {
-        if(channel==null || channel.isEmpty()){
+        if (channel == null || channel.isEmpty()) {
             return;
         }
-        mChannelList.clear();;
+        mChannelList.clear();
+        ;
         mChannelList.addAll(channel);
         mChannelAdapter.notifyDataSetChanged();
     }
 
     private void refreshBaner(List<BannerBean> bannerBeans) {
         mBanner.setAutoPlay(true)
-                .setPages(bannerBeans,new MallViewHolder())
+                .setPages(bannerBeans, new MallViewHolder())
                 .setDelayTime(2000)
                 .setIndicatorGravity(BannerConfig.CENTER)
                 .start();
