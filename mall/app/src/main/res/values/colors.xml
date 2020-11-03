@@ -19,4 +19,6 @@
     <color name="coupon_center">#DEB076</color>
     <color name="coupon_end">#E8BC7F</color>
 
+    <color name="main_bg">#F9F9F9</color>
+
 </resources>

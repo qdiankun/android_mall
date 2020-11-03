@@ -8,12 +8,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.me.slone.mall.R;
 import com.me.slone.mall.common.MyAdapter;
 import com.me.slone.mall.http.response.goods.FloorGoodsBean;
 import com.me.slone.mall.http.response.goods.NewGoodsBean;
+import com.me.slone.mall.other.DividerGridItemDecoration;
 import com.me.slone.mall.other.DividerItemDecoration;
 
 import java.util.List;
@@ -59,8 +61,10 @@ public class FloorAdapter extends MyAdapter<FloorGoodsBean> {
                 floorLl.setVisibility(View.VISIBLE);
                 FloorChildAdapter floorChildAdapter = new FloorChildAdapter(getContext());
                 floorChildAdapter.setData(goodsList);
-                Drawable verticalLine = getResources().getDrawable(R.drawable.divider_vertical_bg);
-                DividerItemDecoration dividerItemDecoration =  new DividerItemDecoration(DividerItemDecoration.VERTICAL_LIST, verticalLine);
+                GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2);
+                floorRv.setLayoutManager(layoutManager);
+                Drawable verticalLine = getResources().getDrawable(R.drawable.divider_grid_gray_bg);
+                DividerGridItemDecoration dividerItemDecoration =  new DividerGridItemDecoration(verticalLine);
                 floorRv.addItemDecoration(dividerItemDecoration);
                 floorRv.setAdapter(floorChildAdapter);
                 titleTv.setText(floorGoodsBean.getName());

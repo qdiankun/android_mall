@@ -8,9 +8,9 @@
 <!--        android:startColor="#ffff0000"-->
 <!--        android:type="linear" />-->
 
-    <solid android:color="@color/white"/>
+    <solid android:color="@color/main_bg"/>
 
-    <size android:height="5px"
-        android:width="5px"/>
+    <size android:height="10px"
+        android:width="10px"/>
 
 </shape>

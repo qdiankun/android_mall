@@ -161,7 +161,7 @@ public class HomeFragment extends MyFragment<HomeActivity> {
 
             }
         });
-        Drawable gridLine = getResources().getDrawable(R.drawable.divider_grid_bg);
+        Drawable gridLine = getResources().getDrawable(R.drawable.divider_grid_white_bg);
         mBrandsRv.addItemDecoration(new DividerGridItemDecoration(gridLine));
         mBrandsRv.setAdapter(mBrandAdapter);
         //hotgoods
@@ -187,7 +187,6 @@ public class HomeFragment extends MyFragment<HomeActivity> {
 
             }
         });
-        mFloorRv.addItemDecoration(getVerticalGrayDividerItem());
         mFloorRv.setAdapter(mFloorAdapter);
 
 
@@ -256,7 +255,7 @@ public class HomeFragment extends MyFragment<HomeActivity> {
             view.setOnClickListener(view1 -> {
                 ToastUtils.show(topicBean.getTitle());
             });
-            int width = DisplayUtil.getScreenContentWidth(getContext()) - 50;
+            int width = DisplayUtil.getScreenContentWidth(getContext()) - 80;
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width, ViewGroup.LayoutParams.WRAP_CONTENT);
             topLl.addView(view,params);
         }

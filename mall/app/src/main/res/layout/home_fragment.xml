@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/black5"
+    android:background="@color/main_bg"
     android:orientation="vertical">
 
     <com.hjq.bar.TitleBar
@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         app:backButton="false"
         app:title="@string/home_nav_index"
+        app:titleSize="@dimen/text_18"
         app:background="@color/white"/>
 
     <androidx.core.widget.NestedScrollView
@@ -51,10 +52,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
+                    android:paddingTop="18dp"
+                    android:paddingBottom="18dp"
                     android:gravity="center"
-                    android:textSize="@dimen/text_16"
+                    android:textSize="@dimen/text_18"
                     android:text="优惠券"/>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -77,10 +78,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
+                    android:paddingTop="18dp"
+                    android:paddingBottom="18dp"
                     android:gravity="center"
-                    android:textSize="@dimen/text_16"
+                    android:textSize="@dimen/text_18"
                     android:text="团购专区"/>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -101,10 +102,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
+                    android:paddingTop="18dp"
+                    android:paddingBottom="18dp"
                     android:gravity="center"
-                    android:textSize="@dimen/text_16"
+                    android:textSize="@dimen/text_18"
                     android:text="周一周四 新品首发"/>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -125,10 +126,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
+                    android:paddingTop="18dp"
+                    android:paddingBottom="18dp"
                     android:gravity="center"
-                    android:textSize="@dimen/text_16"
+                    android:textSize="@dimen/text_18"
                     android:text="品牌制造商直供"/>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -149,10 +150,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
+                    android:paddingTop="18dp"
+                    android:paddingBottom="18dp"
                     android:gravity="center"
-                    android:textSize="@dimen/text_16"
+                    android:textSize="@dimen/text_18"
                     android:text="人气推荐"/>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -173,10 +174,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
+                    android:paddingTop="18dp"
+                    android:paddingBottom="18dp"
                     android:gravity="center"
-                    android:textSize="@dimen/text_16"
+                    android:textSize="@dimen/text_18"
                     android:text="专题精选"/>
 
                 <HorizontalScrollView

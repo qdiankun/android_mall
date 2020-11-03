@@ -4,25 +4,24 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:layout_marginTop="8dp"
     android:id="@+id/ll_floor"
-    android:background="@color/black5">
+    android:background="@color/main_bg">
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp"
         android:gravity="center"
-        android:textSize="@dimen/text_16"
+        android:textSize="@dimen/text_18"
         tools:text="人气推荐"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_floor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
         android:background="@color/white"
         />
 
@@ -31,11 +30,10 @@
         android:id="@+id/tv_more"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:gravity="center"
-        android:textSize="@dimen/text_16"
+        android:textSize="@dimen/text_18"
         android:background="@color/white"
         tools:text="更多居家好物 >"/>
 
