@@ -33,13 +33,16 @@ public class SplashActivity extends MyActivity {
     protected void initView() {
         mLottieView = findViewById(R.id.iv_splash_lottie);
         mDebugView = findViewById(R.id.iv_splash_debug);
-        mLottieView.addAnimatorListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                startActivity(HomeActivity.class);
-                finish();
-            }
-        });
+//        mLottieView.addAnimatorListener(new AnimatorListenerAdapter() {
+//            @Override
+//            public void onAnimationEnd(Animator animation) {
+//                startActivity(HomeActivity.class);
+//                finish();
+//            }
+//        });
+
+        startActivity(HomeActivity.class);
+        finish();
     }
 
     @Override

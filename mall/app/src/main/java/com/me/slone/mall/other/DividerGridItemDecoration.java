@@ -1,7 +1,6 @@
 package com.me.slone.mall.other;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -18,13 +17,10 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
  */
 public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
 
-    private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
     private Drawable mDivider;
 
-    public DividerGridItemDecoration(Context context) {
-        final TypedArray a = context.obtainStyledAttributes(ATTRS);
-        mDivider = a.getDrawable(0);
-        a.recycle();
+    public DividerGridItemDecoration(Drawable drawable) {
+        this.mDivider = drawable;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.me.slone.mall.ui.fragment;
 
+import android.graphics.drawable.Drawable;
 import android.view.View;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -19,15 +20,17 @@ import com.me.slone.mall.http.response.goods.ChannelBean;
 import com.me.slone.mall.http.response.goods.CouponBean;
 import com.me.slone.mall.http.response.goods.GroupBean;
 import com.me.slone.mall.http.response.goods.HomeGoodsBean;
+import com.me.slone.mall.http.response.goods.HotGoodsBean;
 import com.me.slone.mall.http.response.goods.NewGoodsBean;
 import com.me.slone.mall.other.DividerGridItemDecoration;
+import com.me.slone.mall.other.DividerItemDecoration;
 import com.me.slone.mall.other.GridSpaceDecoration;
-import com.me.slone.mall.other.SimpleDividerDecoration;
 import com.me.slone.mall.ui.activity.HomeActivity;
 import com.me.slone.mall.ui.adapter.BrandAdapter;
 import com.me.slone.mall.ui.adapter.ChannelAdapter;
 import com.me.slone.mall.ui.adapter.CouponAdapter;
 import com.me.slone.mall.ui.adapter.GroupAdapter;
+import com.me.slone.mall.ui.adapter.HotGoodsAdapter;
 import com.me.slone.mall.ui.adapter.MallViewHolder;
 import com.me.slone.mall.ui.adapter.NewGoodsAdapter;
 import com.ms.banner.Banner;
@@ -63,6 +66,10 @@ public class HomeFragment extends MyFragment<HomeActivity> {
     private RecyclerView mBrandsRv;
     private BrandAdapter mBrandAdapter;
     private List<BrandBean> mBrandList = new ArrayList<>();
+    //hotgoods
+    private RecyclerView mHotGoodsRv;
+    private HotGoodsAdapter mHotGoodsAdapter;
+    private List<HotGoodsBean> mHotGoodsList = new ArrayList<>();
 
 
 
@@ -100,7 +107,7 @@ public class HomeFragment extends MyFragment<HomeActivity> {
                 ToastUtils.show(mCouponList.get(position).getName());
             }
         });
-        mCouponRv.addItemDecoration(new GridSpaceDecoration(getContext()));
+        mCouponRv.addItemDecoration(getVerticalWhiteDividerItem());
         mCouponRv.setAdapter(mCouponAdapter);
         //groups
         mGroupRv = findViewById(R.id.rv_group);
@@ -112,7 +119,7 @@ public class HomeFragment extends MyFragment<HomeActivity> {
 
             }
         });
-        mGroupRv.addItemDecoration(new SimpleDividerDecoration(getContext()));
+        mGroupRv.addItemDecoration(getVerticalGrayDividerItem());
         mGroupRv.setAdapter(mGroupAdapter);
         //newgoods
         mNewGoodsRv = findViewById(R.id.rv_newgoods);
@@ -140,8 +147,31 @@ public class HomeFragment extends MyFragment<HomeActivity> {
 
             }
         });
-        mBrandsRv.addItemDecoration(new DividerGridItemDecoration(getContext()));
+        Drawable gridLine = getResources().getDrawable(R.drawable.divider_grid_bg);
+        mBrandsRv.addItemDecoration(new DividerGridItemDecoration(gridLine));
         mBrandsRv.setAdapter(mBrandAdapter);
+        //hotgoods
+        mHotGoodsRv = findViewById(R.id.rv_hotgoods);
+        mHotGoodsAdapter = new HotGoodsAdapter(getContext());
+        mHotGoodsAdapter.setData(mHotGoodsList);
+        mHotGoodsAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
+
+            }
+        });
+        mHotGoodsRv.addItemDecoration(getVerticalGrayDividerItem());
+        mHotGoodsRv.setAdapter(mHotGoodsAdapter);
+    }
+
+    private DividerItemDecoration getVerticalGrayDividerItem(){
+        Drawable verticalLine = getResources().getDrawable(R.drawable.divider_vertical_bg);
+        return  new DividerItemDecoration(DividerItemDecoration.VERTICAL_LIST,verticalLine);
+    }
+
+    private DividerItemDecoration getVerticalWhiteDividerItem(){
+        Drawable verticalLine = getResources().getDrawable(R.drawable.divider_vertical_white_bg);
+        return  new DividerItemDecoration(DividerItemDecoration.VERTICAL_LIST,verticalLine);
     }
 
     @Override
@@ -162,8 +192,18 @@ public class HomeFragment extends MyFragment<HomeActivity> {
                         refreshGroup(result.getData().getGrouponList());
                         refreshNewGoods(result.getData().getNewGoodsList());
                         refreshBrands(result.getData().getBrandList());
+                        refreshHotGoods(result.getData().getHotGoodsList());
                     }
                 });
+    }
+
+    private void refreshHotGoods(List<HotGoodsBean> hotGoodsList) {
+        if(hotGoodsList == null || hotGoodsList.isEmpty()){
+            return;
+        }
+        mHotGoodsList.clear();
+        mHotGoodsList.addAll(hotGoodsList);
+        mHotGoodsAdapter.notifyDataSetChanged();
     }
 
     private void refreshBrands(List<BrandBean> brandList) {

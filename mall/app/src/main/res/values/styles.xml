@@ -24,7 +24,7 @@
         <!--<item name="android:windowSoftInputMode">stateHidden</item>-->
         <!-- 关闭 RecyclerView ScrollView ViewPager 水波纹效果 -->
         <item name="android:overScrollMode">never</item>
-        <item name="android:listDivider">@drawable/divider_bg</item>
+        <item name="android:listDivider">@drawable/divider_grid_bg</item>
     </style>
 
     <!--没有选中的样式-->
