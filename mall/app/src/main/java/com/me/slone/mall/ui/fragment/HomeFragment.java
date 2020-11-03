@@ -24,6 +24,7 @@ import com.me.slone.mall.http.response.goods.BannerBean;
 import com.me.slone.mall.http.response.goods.BrandBean;
 import com.me.slone.mall.http.response.goods.ChannelBean;
 import com.me.slone.mall.http.response.goods.CouponBean;
+import com.me.slone.mall.http.response.goods.FloorGoodsBean;
 import com.me.slone.mall.http.response.goods.GroupBean;
 import com.me.slone.mall.http.response.goods.HomeGoodsBean;
 import com.me.slone.mall.http.response.goods.HotGoodsBean;
@@ -36,6 +37,7 @@ import com.me.slone.mall.ui.activity.HomeActivity;
 import com.me.slone.mall.ui.adapter.BrandAdapter;
 import com.me.slone.mall.ui.adapter.ChannelAdapter;
 import com.me.slone.mall.ui.adapter.CouponAdapter;
+import com.me.slone.mall.ui.adapter.FloorAdapter;
 import com.me.slone.mall.ui.adapter.GroupAdapter;
 import com.me.slone.mall.ui.adapter.HotGoodsAdapter;
 import com.me.slone.mall.ui.adapter.MallViewHolder;
@@ -80,7 +82,10 @@ public class HomeFragment extends MyFragment<HomeActivity> {
     private List<HotGoodsBean> mHotGoodsList = new ArrayList<>();
     //topics
     private LinearLayout topLl;
-
+    //floor
+    private RecyclerView mFloorRv;
+    private FloorAdapter mFloorAdapter;
+    private List<FloorGoodsBean> mFloorGoodsList = new ArrayList<>();
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
@@ -173,6 +178,18 @@ public class HomeFragment extends MyFragment<HomeActivity> {
         mHotGoodsRv.setAdapter(mHotGoodsAdapter);
 
         topLl = findViewById(R.id.ll_topics);
+        mFloorRv = findViewById(R.id.rv_floor);
+        mFloorAdapter = new FloorAdapter(getContext());
+        mFloorAdapter.setData(mFloorGoodsList);
+        mFloorAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
+
+            }
+        });
+        mFloorRv.addItemDecoration(getVerticalGrayDividerItem());
+        mFloorRv.setAdapter(mFloorAdapter);
+
 
     }
 
@@ -206,8 +223,18 @@ public class HomeFragment extends MyFragment<HomeActivity> {
                         refreshBrands(result.getData().getBrandList());
                         refreshHotGoods(result.getData().getHotGoodsList());
                         refreshTopics(result.getData().getTopicList());
+                        refreshFloor(result.getData().getFloorGoodsList());
                     }
                 });
+    }
+
+    private void refreshFloor(List<FloorGoodsBean> floorGoodsList) {
+        if (floorGoodsList == null || floorGoodsList.isEmpty()) {
+            return;
+        }
+        mFloorGoodsList.clear();
+        mFloorGoodsList.addAll(floorGoodsList);
+        mFloorAdapter.notifyDataSetChanged();
     }
 
     private void refreshTopics(List<TopicBean> topicList) {
