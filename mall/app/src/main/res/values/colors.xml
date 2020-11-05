@@ -20,5 +20,7 @@
     <color name="coupon_end">#E8BC7F</color>
 
     <color name="main_bg">#F9F9F9</color>
+    <color name="color_f5f5f5">#F5F5F5</color>
+    <color name="color_a4a4a4">#A4A4A4</color>
 
 </resources>

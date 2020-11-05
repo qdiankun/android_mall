@@ -1,6 +1,8 @@
 package com.me.slone.mall.ui.fragment;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import com.hjq.base.BaseAdapter;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.hjq.toast.ToastUtils;
+import com.me.slone.mall.BuildConfig;
 import com.me.slone.mall.R;
 import com.me.slone.mall.common.MyFragment;
 import com.me.slone.mall.http.glide.GlideApp;
@@ -33,6 +36,7 @@ import com.me.slone.mall.http.response.goods.TopicBean;
 import com.me.slone.mall.other.DividerGridItemDecoration;
 import com.me.slone.mall.other.DividerItemDecoration;
 import com.me.slone.mall.other.GridSpaceDecoration;
+import com.me.slone.mall.ui.activity.GoodDetailActivity;
 import com.me.slone.mall.ui.activity.HomeActivity;
 import com.me.slone.mall.ui.adapter.BrandAdapter;
 import com.me.slone.mall.ui.adapter.ChannelAdapter;
@@ -144,6 +148,11 @@ public class HomeFragment extends MyFragment<HomeActivity> {
         mNewGoodsAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("goodId",mNewGoodsList.get(position).getId());
+                Intent intent = new Intent(getActivity(),GoodDetailActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
 
             }
         });

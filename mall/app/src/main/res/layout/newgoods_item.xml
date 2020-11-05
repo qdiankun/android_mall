@@ -25,7 +25,7 @@
         android:textColor="@color/black"
         android:textSize="@dimen/text_14"
         android:layout_gravity="center_horizontal"
-        tools:text="现价:59"/>
+        tools:text="现价: ¥59"/>
 
     <TextView
         android:id="@+id/tv_price"
@@ -36,6 +36,6 @@
         android:textStyle="bold"
         android:textSize="@dimen/text_14"
         android:layout_gravity="center_horizontal"
-        tools:text="团购价:30"/>
+        tools:text="团购价: ¥30"/>
 
 </LinearLayout>

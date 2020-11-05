@@ -19,6 +19,10 @@ public class BrandBean {
     private String desc;
     private String picUrl;
     private int floorPrice;
+    //detail中添加
+    private String addTime;
+    private String updateTime;
+    private boolean deleted;
 
     public void setId(int id) {
         this.id = id;
@@ -58,5 +62,29 @@ public class BrandBean {
 
     public int getFloorPrice() {
         return floorPrice;
+    }
+
+    public String getAddTime() {
+        return addTime;
+    }
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setAddTime(String addTime) {
+        this.addTime = addTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }
