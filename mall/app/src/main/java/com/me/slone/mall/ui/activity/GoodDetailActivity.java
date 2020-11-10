@@ -1,11 +1,10 @@
 package com.me.slone.mall.ui.activity;
 
-import android.util.Log;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
-import android.view.View;
 
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
@@ -16,9 +15,10 @@ import com.me.slone.mall.http.request.GoodDetailApi;
 import com.me.slone.mall.http.response.goodsdetail.GoodsDetailBean;
 import com.me.slone.mall.http.response.goodsdetail.GoodsDetailInfoBean;
 import com.me.slone.mall.ui.adapter.GoodsDetailViewHolder;
-import com.me.slone.mall.ui.adapter.MallViewHolder;
 import com.ms.banner.Banner;
 import com.ms.banner.BannerConfig;
+
+import okhttp3.Call;
 
 /**
  * Author：diankun
@@ -75,6 +75,7 @@ public class GoodDetailActivity extends MyActivity {
         webSettings.setDefaultTextEncodingName("UTF -8");
         //支持自动加载图片
         webSettings.setLoadsImagesAutomatically(true);
+        mWebView.setWebContentsDebuggingEnabled(true);
         //监听WebView是否加载完成网页
         mWebView.setWebViewClient(new WebViewClient(){
             @Override
@@ -87,15 +88,28 @@ public class GoodDetailActivity extends MyActivity {
 
     }
 
+    /**
+     * 更新图片显示样式
+     */
     private void loadJS() {
-        mWebView.loadUrl("javascript:(function(){"
-               //将DIV元素中的外边距和内边距设置为零，防止网页左右有空隙
-                +" var divs = document.getElementsByTagName(\"div\");"
-                +" for(var j=0;j"
-                +"  divs[j].style.margin=\"0px\";"
-                +"  divs[j].style.padding=\"0px\";"
-                +"  divs[j].style.width=document.body.clientWidth-10;"
-                +" }");
+        String updateView =
+                "function updateView(){\n" +
+                "            var p = document.getElementsByTagName('p');\n" +
+                "            console.log('ps = '+p.length);\n" +
+                "            for(var i=0;i<p.length;i++){\n" +
+                "                console.log('p='+p );\n" +
+                "                p[i].style.margin = '0%';\n" +
+                "                p[i].style.display = 'flex';\n" +
+                "                p[i].style.width = \"100%\";\n" +
+                "            }\n" +
+                "            var img = document.getElementsByTagName('img');\n" +
+                "            for(var j=0;j<img.length;j++){\n" +
+                "                img[j].style.width='100%';\n" +
+                "            }\n" +
+                "        }";
+        mWebView.loadUrl("javascript:( "+updateView+" )()");
+        //mWebView.loadUrl(js);
+        hideDialog();
 
     }
 
@@ -137,5 +151,10 @@ public class GoodDetailActivity extends MyActivity {
         mSpecificationTv.setText("规格");
         mBrandTv.setVisibility(View.GONE);
         mWebView.loadData(info.getDetail(),"text/html; charset=UTF-8", null);
+    }
+
+    @Override
+    public void onEnd(Call call) {
+        //super.onEnd(call);
     }
 }

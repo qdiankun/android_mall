@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,6 +8,7 @@
     android:orientation="vertical">
 
     <com.hjq.bar.TitleBar
+        android:id="@+id/titlebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:backButton="false"
@@ -18,7 +19,8 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/titlebar">
 
 
         <LinearLayout
@@ -48,88 +50,11 @@
                 android:textStyle="bold"
                 tools:text="云端沙发组合"/>
 
-            <LinearLayout
+            <include
+                android:id="@+id/header"
+                layout="@layout/header_goods"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:padding="10dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_brief"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="MUJI供应商携手打造"
-                    android:textColor="@color/color_a4a4a4"
-                    android:layout_marginTop="10dp"
-                    android:textSize="@dimen/text_14"/>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tv_price1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        tools:text="原价：¥ 4019" />
-
-                    <TextView
-                        android:id="@+id/tv_price2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:textColor="@color/coupon_center"
-                        tools:text="现价：¥ 3999"/>
-
-
-                </LinearLayout>
-
-
-                <TextView
-                    android:id="@+id/tv_brand"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:padding="5dp"
-                    android:textColor="@color/orange"
-                    android:background="@drawable/brand_round_bg"
-                    tools:text="MUJI供应商"/>
-
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="@color/black30"/>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
-                android:paddingLeft="10dp">
-
-                <TextView
-                    android:id="@+id/tv_specification"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="规格" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/bar_icon_back_black"/>
-
-
-            </RelativeLayout>
+                android:layout_height="wrap_content"/>
 
             <WebView
                 android:id="@+id/webview"
@@ -141,4 +66,68 @@
 
     </androidx.core.widget.NestedScrollView>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/white"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent" >
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:textColor="@color/white"
+                android:background="@drawable/ic_collect" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="2px"
+            android:layout_height="match_parent"
+            android:background="@color/black25"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:layout_height="match_parent" >
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@drawable/home_car_off_ic" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_addcar"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@color/color_f57f17"
+            android:textSize="@dimen/text_16"
+            android:text="加入购物车"/>
+
+        <TextView
+            android:id="@+id/tv_buy"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:background="@color/color_c62828"
+            android:textSize="@dimen/text_16"
+            android:text="立即购买"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
