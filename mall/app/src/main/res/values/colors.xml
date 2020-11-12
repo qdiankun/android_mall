@@ -24,5 +24,8 @@
     <color name="color_a4a4a4">#A4A4A4</color>
     <color name="color_c62828">#C62828</color>
     <color name="color_f57f17">#F57F17</color>
+    <color name="color_424242">#424242</color>
+    <color name="color_D32F2F">#D32F2F</color>
+    <color name="divider">#BDBDBD</color>
 
 </resources>

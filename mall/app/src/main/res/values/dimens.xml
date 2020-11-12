@@ -6,6 +6,17 @@
     <dimen name="divider_height2">1px</dimen>
 
     <dimen name="dimen_3">3dp</dimen>
+    <dimen name="dp_1">1dp</dimen>
+    <dimen name="dp_3">3dp</dimen>
+    <dimen name="dp_8">8dp</dimen>
+    <dimen name="dp_15">15dp</dimen>
+    <dimen name="dp_16">16dp</dimen>
+    <dimen name="dp_18">18dp</dimen>
+    <dimen name="dp_20">20dp</dimen>
+    <dimen name="dp_40">40dp</dimen>
+    <dimen name="dp_80">80dp</dimen>
+    <dimen name="dp_90">90dp</dimen>
+    <dimen name="dp_100">100dp</dimen>
 
     <dimen name="text_26">26sp</dimen>
     <dimen name="text_24">24sp</dimen>
@@ -15,6 +26,15 @@
     <dimen name="text_16">16sp</dimen>
     <dimen name="text_14">14sp</dimen>
     <dimen name="text_12">12sp</dimen>
+    <dimen name="text_5">5sp</dimen>
+    <dimen name="text_4">4sp</dimen>
     <dimen name="text_1">1sp</dimen>
+    <dimen name="dp_10">10dp</dimen>
+    <dimen name="dp_60">60dp</dimen>
+    <dimen name="dp_70">70dp</dimen>
+    <dimen name="text_8">8sp</dimen>
+    <dimen name="dp_25">25dp</dimen>
+    <dimen name="dp_5">5dp</dimen>
+
 
 </resources>

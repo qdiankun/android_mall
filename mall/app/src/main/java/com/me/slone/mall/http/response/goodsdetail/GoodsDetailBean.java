@@ -2,6 +2,7 @@ package com.me.slone.mall.http.response.goodsdetail;
 
 import com.me.slone.mall.http.response.goods.BrandBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class GoodsDetailBean {
     private boolean share;
     private List<AttibuteBean> attribute;
     private BrandBean brand;
-    private List<ProductBean> productList;
+    private ArrayList<ProductBean> productList;
     private GoodsDetailInfoBean info;
 
     public void setSpecificationList(List<SpecificationListBean> specificationList) {
@@ -59,7 +60,7 @@ public class GoodsDetailBean {
         this.brand = brand;
     }
 
-    public void setProductList(List<ProductBean> productList) {
+    public void setProductList(ArrayList<ProductBean> productList) {
         this.productList = productList;
     }
 
@@ -103,7 +104,7 @@ public class GoodsDetailBean {
         return brand;
     }
 
-    public List<ProductBean> getProductList() {
+    public ArrayList<ProductBean> getProductList() {
         return productList;
     }
 

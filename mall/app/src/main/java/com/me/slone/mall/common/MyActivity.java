@@ -42,6 +42,8 @@ public abstract class MyActivity extends BaseActivity
     /** 对话框数量 */
     private int mDialogTotal;
 
+    protected String TAG = getClass().getSimpleName();
+
     /**
      * 当前加载对话框是否在显示中
      */

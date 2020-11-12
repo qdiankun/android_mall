@@ -1,5 +1,6 @@
 package com.me.slone.mall.http.response.goodsdetail;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * Time：20-11-5 下午2:58
  * Description: 产品规格
  */
-public class ProductBean {
+public class ProductBean implements Serializable {
     /**
      *
      *"id": 1,
