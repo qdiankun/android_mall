@@ -27,9 +27,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.HomeActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"
+            />
         <activity android:name=".ui.activity.GoodDetailActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".ui.activity.LoginActivity"
             android:screenOrientation="portrait"
             />
     </application>

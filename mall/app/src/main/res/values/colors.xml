@@ -28,4 +28,10 @@
     <color name="color_D32F2F">#D32F2F</color>
     <color name="divider">#BDBDBD</color>
 
+    <!-- 分割线的颜色 -->
+    <color name="colorLine">#ECECEC</color>
+    <!-- 按钮按压时的颜色 -->
+    <color name="colorButtonPressed">#AA5A8DDF</color>
+    <!-- 按钮禁用时的颜色 -->
+    <color name="colorButtonDisable">#BBBBBB</color>
 </resources>
