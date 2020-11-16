@@ -152,6 +152,7 @@ dependencies {
 
     //banner
     implementation 'com.ms:banner-androidx:1.0.0'
-
+    //utilcodex
+    implementation 'com.blankj:utilcodex:1.30.5'
 
 }

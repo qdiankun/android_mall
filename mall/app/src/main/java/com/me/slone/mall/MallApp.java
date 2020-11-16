@@ -8,12 +8,16 @@ import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
 
+import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.Utils;
 import com.hjq.bar.TitleBar;
 import com.hjq.bar.style.TitleBarLightStyle;
 import com.hjq.http.EasyConfig;
 import com.hjq.http.config.IRequestServer;
 import com.hjq.toast.ToastInterceptor;
 import com.hjq.toast.ToastUtils;
+import com.me.slone.mall.common.Constants;
+import com.me.slone.mall.common.UserConstants;
 import com.me.slone.mall.http.model.RequestHandler;
 import com.me.slone.mall.http.server.TestServer;
 import com.me.slone.mall.other.AppConfig;
@@ -35,6 +39,18 @@ public class MallApp extends Application {
         initSdk(this);
 
         initNetWork(this);
+
+        initUtils();
+
+        initUser();
+    }
+
+    private void initUser() {
+        UserConstants.token = SPUtils.getInstance().getString(Constants.SP_KEY_TOKEN);
+    }
+
+    private void initUtils() {
+        Utils.init(this);
     }
 
     private void initNetWork(MallApp mallApp) {

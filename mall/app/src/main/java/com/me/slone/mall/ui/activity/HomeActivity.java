@@ -3,6 +3,7 @@ package com.me.slone.mall.ui.activity;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
 
+import android.text.TextUtils;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -10,6 +11,7 @@ import com.hjq.base.BaseFragmentAdapter;
 import com.me.slone.mall.R;
 import com.me.slone.mall.common.MyActivity;
 import com.me.slone.mall.common.MyFragment;
+import com.me.slone.mall.common.UserConstants;
 import com.me.slone.mall.ui.fragment.CarFragment;
 import com.me.slone.mall.ui.fragment.CategoryFragment;
 import com.me.slone.mall.ui.fragment.HomeFragment;
@@ -57,8 +59,12 @@ public class HomeActivity extends MyActivity implements  BottomNavigationView.On
             case R.id.home_found:
                 mViewPager.setCurrentItem(1);
                 return true;
-            case R.id.home_message:
-                mViewPager.setCurrentItem(2);
+            case R.id.home_shop:
+                if(UserConstants.isLogin()) {
+                    mViewPager.setCurrentItem(2);
+                } else {
+                    startActivity(LoginActivity.class);
+                }
                 return true;
             case R.id.home_me:
                 mViewPager.setCurrentItem(3);
