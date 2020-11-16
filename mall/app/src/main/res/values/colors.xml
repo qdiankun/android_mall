@@ -20,12 +20,14 @@
     <color name="coupon_end">#E8BC7F</color>
 
     <color name="main_bg">#F9F9F9</color>
+    <color name="color_fafafa">#FAFAFA</color>
     <color name="color_f5f5f5">#F5F5F5</color>
     <color name="color_a4a4a4">#A4A4A4</color>
     <color name="color_c62828">#C62828</color>
     <color name="color_f57f17">#F57F17</color>
     <color name="color_424242">#424242</color>
     <color name="color_D32F2F">#D32F2F</color>
+    <color name="color_263238">#263238</color>
     <color name="divider">#BDBDBD</color>
 
     <!-- 分割线的颜色 -->

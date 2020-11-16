@@ -78,4 +78,26 @@
     <string name="register_password_hint2">请再次输入一次密码</string>
     <string name="register_succeed">注册成功</string>
 
+
+
+    <!-- 我的 -->
+    <string name="my_coupon">优惠券</string>
+    <string name="my_collect">收藏</string>
+    <string name="my_footer">足迹</string>
+    <string name="my_group">拼团</string>
+    <string name="my_address">地址</string>
+    <string name="my_bindphone">绑定手机</string>
+    <string name="my_contact_service">联系客服</string>
+    <string name="my_aboutus">关于我们</string>
+
+    <string name="my_orders">我的订单</string>
+    <string name="my_shop">微商城</string>
+    <string name="my_check_allorder">查看全部订单</string>
+    <string name="my_topay">待付款</string>
+    <string name="my_tosend">待发货</string>
+    <string name="my_toreceive">待收货</string>
+    <string name="my_tojudge">待评价</string>
+    <string name="my_toservice">去售后</string>
+
+
 </resources>
