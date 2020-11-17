@@ -24,7 +24,7 @@
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_20"
+            android:textSize="@dimen/sp_20"
             android:textColor="@color/white"
             tools:text="云端沙发组合"/>
 
@@ -33,7 +33,7 @@
             android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_14"
+            android:textSize="@dimen/sp_14"
             android:textColor="@color/white"
             tools:text="2人成团"/>
 

@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_14"
+        android:textSize="@dimen/sp_14"
         android:layout_gravity="center_horizontal"
         tools:text="现价: ¥59"/>
 
@@ -34,7 +34,7 @@
         android:layout_marginTop="5dp"
         android:textColor="@color/coupon_center"
         android:textStyle="bold"
-        android:textSize="@dimen/text_14"
+        android:textSize="@dimen/sp_14"
         android:layout_gravity="center_horizontal"
         tools:text="团购价: ¥30"/>
 

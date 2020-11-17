@@ -36,4 +36,8 @@
     <color name="colorButtonPressed">#AA5A8DDF</color>
     <!-- 按钮禁用时的颜色 -->
     <color name="colorButtonDisable">#BBBBBB</color>
+
+    <color name="deep_grey">#e6e6e6</color>
+    <color name="shallow_green">#FF9E80</color>
+    <color name="shallow_grey">#FF757575</color>
 </resources>

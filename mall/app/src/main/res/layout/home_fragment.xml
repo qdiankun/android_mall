@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         app:backButton="false"
         app:title="@string/home_nav_index"
-        app:titleSize="@dimen/text_18"
+        app:titleSize="@dimen/sp_18"
         app:background="@color/white"/>
 
     <androidx.core.widget.NestedScrollView
@@ -55,7 +55,7 @@
                     android:paddingTop="18dp"
                     android:paddingBottom="18dp"
                     android:gravity="center"
-                    android:textSize="@dimen/text_18"
+                    android:textSize="@dimen/sp_18"
                     android:text="优惠券"/>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -81,7 +81,7 @@
                     android:paddingTop="18dp"
                     android:paddingBottom="18dp"
                     android:gravity="center"
-                    android:textSize="@dimen/text_18"
+                    android:textSize="@dimen/sp_18"
                     android:text="团购专区"/>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -105,7 +105,7 @@
                     android:paddingTop="18dp"
                     android:paddingBottom="18dp"
                     android:gravity="center"
-                    android:textSize="@dimen/text_18"
+                    android:textSize="@dimen/sp_18"
                     android:text="周一周四 新品首发"/>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -129,7 +129,7 @@
                     android:paddingTop="18dp"
                     android:paddingBottom="18dp"
                     android:gravity="center"
-                    android:textSize="@dimen/text_18"
+                    android:textSize="@dimen/sp_18"
                     android:text="品牌制造商直供"/>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -153,7 +153,7 @@
                     android:paddingTop="18dp"
                     android:paddingBottom="18dp"
                     android:gravity="center"
-                    android:textSize="@dimen/text_18"
+                    android:textSize="@dimen/sp_18"
                     android:text="人气推荐"/>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -177,7 +177,7 @@
                     android:paddingTop="18dp"
                     android:paddingBottom="18dp"
                     android:gravity="center"
-                    android:textSize="@dimen/text_18"
+                    android:textSize="@dimen/sp_18"
                     android:text="专题精选"/>
 
                 <HorizontalScrollView

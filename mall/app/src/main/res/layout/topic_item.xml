@@ -28,7 +28,7 @@
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/text_18"
+            android:textSize="@dimen/sp_18"
             android:textColor="@color/black"
             tools:text="云端沙发组合"/>
 
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
             android:textStyle="bold"
-            android:textSize="@dimen/text_18"
+            android:textSize="@dimen/sp_18"
             android:textColor="@color/coupon_center"
             tools:text="2人成团"/>
 
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginBottom="15dp"
-        android:textSize="@dimen/text_14"
+        android:textSize="@dimen/sp_14"
         android:textColor="@color/black40"
         tools:text="2人成团"/>
 

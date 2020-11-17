@@ -155,4 +155,6 @@ dependencies {
     //utilcodex
     implementation 'com.blankj:utilcodex:1.30.5'
 
+    implementation 'q.rorbin:VerticalTabLayout:1.2.5'
+
 }

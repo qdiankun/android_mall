@@ -11,6 +11,8 @@
         android:id="@+id/titlebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:backButton="false"
+        app:lineVisible="false"
         app:title="@string/home_nav_me" />
 
     <androidx.core.widget.NestedScrollView
@@ -52,7 +54,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/dp_20"
                     android:textStyle="bold"
-                    android:textSize="@dimen/text_18"/>
+                    android:textSize="@dimen/sp_18"/>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -66,7 +68,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/my_shop"
-                        android:textSize="@dimen/text_14"
+                        android:textSize="@dimen/sp_14"
                         android:textColor="@color/white"/>
 
                     <ImageView

@@ -19,7 +19,7 @@
             tools:text="MUJI供应商携手打造"
             android:textColor="@color/color_a4a4a4"
             android:layout_marginTop="10dp"
-            android:textSize="@dimen/text_14"/>
+            android:textSize="@dimen/sp_14"/>
 
 
         <LinearLayout
