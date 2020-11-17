@@ -1,5 +1,8 @@
 package com.me.slone.mall.ui.fragment;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -7,6 +10,8 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blankj.utilcode.util.FragmentUtils;
+import com.hjq.base.BaseAdapter;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.me.slone.mall.R;
@@ -17,10 +22,13 @@ import com.me.slone.mall.http.request.GoodCategoryApi;
 import com.me.slone.mall.http.response.category.Category;
 import com.me.slone.mall.http.response.category.GoodCategory;
 import com.me.slone.mall.other.GridSpaceDecoration;
+import com.me.slone.mall.ui.activity.CategoryListActivity;
 import com.me.slone.mall.ui.activity.HomeActivity;
 import com.me.slone.mall.ui.adapter.CategoryAdapter;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -64,8 +72,29 @@ public class CategoryFragment extends MyFragment<HomeActivity> {
         mCategoryRv.setLayoutManager(newGoodsManager);
         mCategoryAdapter = new CategoryAdapter(getContext());
         mCategoryAdapter.setData(mCategoryList);
+        mCategoryAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
+                jumpCategoryList();
+            }
+        });
         mCategoryRv.addItemDecoration(new GridSpaceDecoration(getContext()));
         mCategoryRv.setAdapter(mCategoryAdapter);
+    }
+
+    /**
+     * 跳转分类列表页面
+     */
+    private void jumpCategoryList() {
+        Category firstCategory = mCategoryAdapter.getFirstCategory();
+        ArrayList<Category> categories = new ArrayList<>();
+        categories.addAll(mCategoryList);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(CategoryListActivity.ARG_FIRST_CATEGORY,firstCategory);
+        bundle.putSerializable(CategoryListActivity.ARG_SUB_CATEGORY,categories);
+        Intent intent = new Intent(getActivity(),CategoryListActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent,bundle);
     }
 
     @Override
@@ -86,7 +115,8 @@ public class CategoryFragment extends MyFragment<HomeActivity> {
                         mAllCategorys= result.getData().getAllList();
                         refreshCategory(result.getData().getCurrentCategory());
                         refreshCategoryList(result.getData().getCategoryList());
-                        refreshSubCategory(result.getData().getCurrentSubCategory());
+                        refreshSubCategory(result.getData().getCurrentSubCategory(),
+                                result.getData().getCurrentCategory());
                     }
                 });
     }
@@ -136,7 +166,7 @@ public class CategoryFragment extends MyFragment<HomeActivity> {
                         .load(category.getPicUrl())
                         .into(mCategoryIv);
                 String name = String.valueOf(category.getId());
-                refreshSubCategory(mAllCategorys.get(name));
+                refreshSubCategory(mAllCategorys.get(name),category);
             }
 
             @Override
@@ -146,12 +176,13 @@ public class CategoryFragment extends MyFragment<HomeActivity> {
         });
     }
 
-    private void refreshSubCategory(List<Category> subCategory) {
+    private void refreshSubCategory(List<Category> subCategory, Category firstCategory) {
         if(subCategory==null || subCategory.isEmpty()){
             return;
         }
         mCategoryList.clear();
         mCategoryList.addAll(subCategory);
+        mCategoryAdapter.setFirstCategory(firstCategory);
         mCategoryAdapter.notifyDataSetChanged();
     }
 

@@ -10,7 +10,7 @@
 
     <solid android:color="@color/main_bg"/>
 
-    <size android:height="10px"
-        android:width="10px"/>
+    <size android:height="@dimen/dp_5"
+        android:width="@dimen/dp_5"/>
 
 </shape>

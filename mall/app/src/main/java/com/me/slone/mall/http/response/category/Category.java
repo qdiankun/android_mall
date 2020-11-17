@@ -1,11 +1,13 @@
 package com.me.slone.mall.http.response.category;
 
+import java.io.Serializable;
+
 /**
  * Author：diankun
  * Time：20-11-17 上午10:13
  * Description:
  */
-public class Category {
+public class Category implements Serializable {
 
     /**
      * "id": 1005010,

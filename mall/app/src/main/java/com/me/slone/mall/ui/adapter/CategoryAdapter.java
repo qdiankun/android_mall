@@ -19,8 +19,19 @@ import com.me.slone.mall.http.response.category.Category;
  */
 public class CategoryAdapter extends MyAdapter<Category> {
 
+    //一级目录
+    private Category firstCategory;
+
     public CategoryAdapter(@NonNull Context context) {
         super(context);
+    }
+
+    public void setFirstCategory(Category firstCategory) {
+        this.firstCategory = firstCategory;
+    }
+
+    public Category getFirstCategory() {
+        return firstCategory;
     }
 
     @NonNull
