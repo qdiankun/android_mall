@@ -69,6 +69,7 @@
     <string name="login_forget">忘记密码？</string>
     <string name="login_text">登录</string>
     <string name="login_other">其他登录方式</string>
+    <string name="login_not">还没有登录</string>
 
 
     <!-- 注册 -->
@@ -98,6 +99,11 @@
     <string name="my_toreceive">待收货</string>
     <string name="my_tojudge">待评价</string>
     <string name="my_toservice">去售后</string>
+
+    <!-- 购物车 -->
+    <string name="cart_tip1">30天无忧退货</string>
+    <string name="cart_tip2">48小时快速退款</string>
+    <string name="cart_tip3">满88元免邮费</string>
 
 
 </resources>

@@ -1,7 +1,6 @@
 package com.me.slone.mall.ui.activity;
 
 import android.os.Bundle;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;

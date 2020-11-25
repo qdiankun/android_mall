@@ -1,12 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/color_f5f5f5"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="car"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-</LinearLayout>
+
+        <com.hjq.bar.TitleBar
+            android:id="@+id/titlebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            app:backButton="false"
+            app:lineVisible="false"
+            app:title="@string/home_nav_car" />
+
+
+        <LinearLayout
+            android:id="@+id/ll_cart_tip"
+            android:layout_below="@id/titlebar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/dp_10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/cart_tip1"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/cart_tip2"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/cart_tip3"
+                android:gravity="center"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@id/ll_cart_tip"
+            android:id="@+id/ll_cartlist"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_alignParentBottom="true">
+
+
+            <TextView
+                android:id="@+id/tv_cart_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/black"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:textStyle="bold"
+                android:textSize="@dimen/sp_16"
+                tools:text="¥ 3236"/>
+
+            <TextView
+                android:id="@+id/tv_buy"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/white"
+                android:layout_margin="@dimen/dp_5"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_20"
+                android:paddingRight="@dimen/dp_20"
+                android:background="@color/color_c62828"
+                android:textSize="@dimen/sp_16"
+                android:text="下单"/>
+
+            <TextView
+                android:id="@+id/tv_addcar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@id/tv_buy"
+                android:layout_marginRight="@dimen/dp_20"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textSize="@dimen/sp_16"
+                android:text="编辑"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <include
+        android:id="@+id/notlogin"
+        android:visibility="gone"
+        layout="@layout/not_login_layout"/>
+
+</FrameLayout>

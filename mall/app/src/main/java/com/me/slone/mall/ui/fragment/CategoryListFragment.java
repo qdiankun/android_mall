@@ -1,5 +1,6 @@
 package com.me.slone.mall.ui.fragment;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hjq.base.BaseAdapter;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.me.slone.mall.R;
@@ -18,6 +20,7 @@ import com.me.slone.mall.http.response.category.Category;
 import com.me.slone.mall.http.response.goods.CategoryListBean;
 import com.me.slone.mall.http.response.goods.NewGoodsBean;
 import com.me.slone.mall.other.DividerGridItemDecoration;
+import com.me.slone.mall.ui.activity.GoodDetailActivity;
 import com.me.slone.mall.ui.activity.HomeActivity;
 import com.me.slone.mall.ui.adapter.FloorChildAdapter;
 
@@ -64,13 +67,17 @@ public class CategoryListFragment extends MyFragment<HomeActivity> {
         mCategoryRv.addItemDecoration(dividerItemDecoration);
         mFloorChildAdapter = new FloorChildAdapter(getContext());
         mFloorChildAdapter.setData(mNewGoodsBeans);
+        mFloorChildAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("goodId",mNewGoodsBeans.get(position).getId());
+                Intent intent = new Intent(getActivity(), GoodDetailActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         mCategoryRv.setAdapter(mFloorChildAdapter);
-//        mHotGoodsAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-//
-//            }
-//        });
     }
 
     @Override

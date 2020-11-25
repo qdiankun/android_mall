@@ -33,6 +33,7 @@ import com.me.slone.mall.http.json.IntegerTypeAdapter;
 import com.me.slone.mall.http.json.ListTypeAdapter;
 import com.me.slone.mall.http.json.LongTypeAdapter;
 import com.me.slone.mall.http.json.StringTypeAdapter;
+import com.me.slone.mall.ui.activity.LoginActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -140,7 +141,7 @@ public final class RequestHandler implements IRequestHandler {
                 if (model.getErrno() == 0) {
                     // 代表执行成功
                     return result;
-                } else if (model.getErrno() == 1001) {
+                } else if (model.getErrno() == 501) {
                     // 代表登录失效，需要重新登录
                     throw new TokenException(mApplication.getString(R.string.http_account_error));
                 } else {
@@ -158,7 +159,9 @@ public final class RequestHandler implements IRequestHandler {
         if (e instanceof HttpException) {
             if (e instanceof TokenException) {
                 // 登录信息失效，跳转到登录页
-
+                Intent intent = new Intent(mApplication, LoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mApplication.startActivity(intent);
             }
         } else {
             if (e instanceof SocketTimeoutException) {

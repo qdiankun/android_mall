@@ -3,6 +3,7 @@ package com.me.slone.mall;
 import android.app.Application;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -77,6 +78,10 @@ public class MallApp extends Application {
                 //.addHeader("time", "20191030")
                 // 启用配置
                 .into();
+        String token = SPUtils.getInstance().getString(Constants.SP_KEY_TOKEN);
+        if(!TextUtils.isEmpty(token)){
+            EasyConfig.getInstance().addHeader("X-Litemall-Token",token);
+        }
     }
 
     private void initSdk(MallApp application) {
