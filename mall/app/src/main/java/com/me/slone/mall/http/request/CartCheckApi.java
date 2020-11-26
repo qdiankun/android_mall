@@ -9,7 +9,7 @@ import java.util.List;
  * Time：20-11-25 下午3:48
  * Description:
  */
-public class CardCheckApi implements IRequestApi {
+public class CartCheckApi implements IRequestApi {
 
     /**
      *  { productIds: xxx, isChecked: 1/0 }
@@ -23,12 +23,12 @@ public class CardCheckApi implements IRequestApi {
         return "cart/checked";
     }
 
-    public CardCheckApi setProductIds(List<Integer> productIds) {
+    public CartCheckApi setProductIds(List<Integer> productIds) {
         this.productIds = productIds;
         return this;
     }
 
-    public CardCheckApi setIsChecked(int isChecked) {
+    public CartCheckApi setIsChecked(int isChecked) {
         this.isChecked = isChecked;
         return this;
     }

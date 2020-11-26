@@ -37,6 +37,7 @@ public class CartListAdapter extends MyAdapter<CartBean> {
 
     public void setEditCart(boolean editCart) {
         this.editCart = editCart;
+        notifyDataSetChanged();
     }
 
     private final class ViewHolder extends MyAdapter.ViewHolder {

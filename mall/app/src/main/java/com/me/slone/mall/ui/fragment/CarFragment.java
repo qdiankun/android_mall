@@ -8,7 +8,6 @@ import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hjq.bar.OnTitleBarListener;
 import com.hjq.bar.TitleBar;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
@@ -16,7 +15,7 @@ import com.me.slone.mall.R;
 import com.me.slone.mall.common.MyFragment;
 import com.me.slone.mall.common.UserConstants;
 import com.me.slone.mall.http.model.HttpData;
-import com.me.slone.mall.http.request.CardCheckApi;
+import com.me.slone.mall.http.request.CartCheckApi;
 import com.me.slone.mall.http.request.CartListApi;
 import com.me.slone.mall.http.response.cart.CartBean;
 import com.me.slone.mall.http.response.cart.CartListBean;
@@ -70,22 +69,18 @@ public class CarFragment extends MyFragment<HomeActivity> {
             checkCart(checkBox.isChecked(), cartBean);
         });
         mCartRv.setAdapter(mCartListAdapter);
-        mTitleBar.setOnTitleBarListener(new OnTitleBarListener() {
-            @Override
-            public void onLeftClick(View v) {
+    }
 
-            }
-
-            @Override
-            public void onTitleClick(View v) {
-
-            }
-
-            @Override
-            public void onRightClick(View v) {
-
-            }
-        });
+    @Override
+    public void onRightClick(View v) {
+        CharSequence rightTitle = mTitleBar.getRightTitle();
+        if ("编辑".equals(rightTitle)) {
+            mTitleBar.setRightTitle("完成");
+            mCartListAdapter.setEditCart(true);
+        } else if ("完成".equals(rightTitle)) {
+            mTitleBar.setRightTitle("编辑");
+            mCartListAdapter.setEditCart(false);
+        }
     }
 
     private void checkCart(boolean checked, CartBean checkCart) {
@@ -107,7 +102,7 @@ public class CarFragment extends MyFragment<HomeActivity> {
             }
         }
         EasyHttp.post(this)
-                .api(new CardCheckApi()
+                .api(new CartCheckApi()
                         .setProductIds(checkedProductIds)
                         .setIsChecked(1))
                 .request(new HttpCallback<HttpData<CartListBean>>(this) {
@@ -121,7 +116,7 @@ public class CarFragment extends MyFragment<HomeActivity> {
 
                 });
         EasyHttp.post(this)
-                .api(new CardCheckApi()
+                .api(new CartCheckApi()
                         .setProductIds(unCheckedProductIds)
                         .setIsChecked(0))
                 .request(new HttpCallback<HttpData<CartListBean>>(this) {
