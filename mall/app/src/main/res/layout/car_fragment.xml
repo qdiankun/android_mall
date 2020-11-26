@@ -20,6 +20,7 @@
             android:layout_alignParentTop="true"
             app:backButton="false"
             app:lineVisible="false"
+            app:rightColor="@color/black"
             app:title="@string/home_nav_car" />
 
 

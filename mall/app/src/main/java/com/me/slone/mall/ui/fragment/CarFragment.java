@@ -1,24 +1,26 @@
 package com.me.slone.mall.ui.fragment;
 
-import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hjq.bar.OnTitleBarListener;
+import com.hjq.bar.TitleBar;
 import com.hjq.http.EasyHttp;
 import com.hjq.http.listener.HttpCallback;
 import com.me.slone.mall.R;
-import com.me.slone.mall.common.MyActivity;
 import com.me.slone.mall.common.MyFragment;
 import com.me.slone.mall.common.UserConstants;
 import com.me.slone.mall.http.model.HttpData;
+import com.me.slone.mall.http.request.CardCheckApi;
 import com.me.slone.mall.http.request.CartListApi;
 import com.me.slone.mall.http.response.cart.CartBean;
 import com.me.slone.mall.http.response.cart.CartListBean;
-import com.me.slone.mall.other.DividerItemDecoration;
+import com.me.slone.mall.ui.activity.HomeActivity;
 import com.me.slone.mall.ui.activity.LoginActivity;
 import com.me.slone.mall.ui.adapter.CartListAdapter;
 
@@ -30,8 +32,9 @@ import java.util.List;
  * Time：20-10-30 下午2:53
  * Description: 购物车
  */
-public class CarFragment extends MyFragment<MyActivity> {
+public class CarFragment extends MyFragment<HomeActivity> {
 
+    private TitleBar mTitleBar;
     private TextView mPriceTv;
     private LinearLayout mNotLoginLl;
     private AppCompatButton mLoginBtn;
@@ -50,6 +53,7 @@ public class CarFragment extends MyFragment<MyActivity> {
 
     @Override
     protected void initView() {
+        mTitleBar = findViewById(R.id.titlebar);
         mNotLoginLl = findViewById(R.id.notlogin);
         mLoginBtn = findViewById(R.id.btn_login_commit);
         mCartRv = findViewById(R.id.ll_cartlist);
@@ -60,7 +64,76 @@ public class CarFragment extends MyFragment<MyActivity> {
         setOnClickListener(mLoginBtn);
         mCartListAdapter = new CartListAdapter(getContext());
         mCartListAdapter.setData(mCartBeansList);
+        mCartListAdapter.setOnChildClickListener(R.id.cb_select, (recyclerView, childView, position) -> {
+            CheckBox checkBox = (CheckBox) childView;
+            CartBean cartBean = mCartBeansList.get(position);
+            checkCart(checkBox.isChecked(), cartBean);
+        });
         mCartRv.setAdapter(mCartListAdapter);
+        mTitleBar.setOnTitleBarListener(new OnTitleBarListener() {
+            @Override
+            public void onLeftClick(View v) {
+
+            }
+
+            @Override
+            public void onTitleClick(View v) {
+
+            }
+
+            @Override
+            public void onRightClick(View v) {
+
+            }
+        });
+    }
+
+    private void checkCart(boolean checked, CartBean checkCart) {
+        List<Integer> checkedProductIds = new ArrayList<>();
+        List<Integer> unCheckedProductIds = new ArrayList<>();
+        for (CartBean cart : mCartBeansList) {
+            if (cart.getProductId() == checkCart.getProductId()) {
+                if (checked) {
+                    checkedProductIds.add(checkCart.getProductId());
+                } else {
+                    unCheckedProductIds.add(checkCart.getProductId());
+                }
+            } else {
+                if (cart.isChecked()) {
+                    checkedProductIds.add(cart.getProductId());
+                } else {
+                    unCheckedProductIds.add(cart.getProductId());
+                }
+            }
+        }
+        EasyHttp.post(this)
+                .api(new CardCheckApi()
+                        .setProductIds(checkedProductIds)
+                        .setIsChecked(1))
+                .request(new HttpCallback<HttpData<CartListBean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<CartListBean> data) {
+                        super.onSucceed(data);
+                        CartListBean cartListBean = data.getData();
+                        refreshCartList(cartListBean);
+                    }
+
+                });
+        EasyHttp.post(this)
+                .api(new CardCheckApi()
+                        .setProductIds(unCheckedProductIds)
+                        .setIsChecked(0))
+                .request(new HttpCallback<HttpData<CartListBean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<CartListBean> data) {
+                        super.onSucceed(data);
+                        CartListBean cartListBean = data.getData();
+                        refreshCartList(cartListBean);
+                    }
+
+                });
     }
 
     @Override
@@ -80,11 +153,6 @@ public class CarFragment extends MyFragment<MyActivity> {
                         CartListBean cartListBean = data.getData();
                         refreshCartList(cartListBean);
                     }
-
-                    @Override
-                    public void onFail(Exception e) {
-                        super.onFail(e);
-                    }
                 });
     }
 
@@ -93,9 +161,11 @@ public class CarFragment extends MyFragment<MyActivity> {
             return;
         }
         if (cartListBean.getCartList() == null || cartListBean.getCartList().isEmpty()) {
+            mTitleBar.setRightTitle("");
             return;
         }
-        mPriceTv.setText(String.valueOf(cartListBean.getCartTotal().getGoodsAmount()));
+        mTitleBar.setRightTitle("编辑");
+        mPriceTv.setText("¥ " + cartListBean.getCartTotal().getCheckedGoodsAmount());
         mCartBeansList.clear();
         mCartBeansList.addAll(cartListBean.getCartList());
         mCartListAdapter.notifyDataSetChanged();
