@@ -143,10 +143,41 @@
                 amount:tvTextSize="@dimen/sp_5"
                 amount:btnTextSize="@dimen/dp_20"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="@dimen/dp_20"
+                android:background="@color/white"
+                android:layout_alignParentBottom="true">
+
+                <TextView
+                    android:id="@+id/tv_add_order"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:background="@color/color_f57f17"
+                    android:textSize="@dimen/sp_16"
+                    android:text="加入购物车"/>
+
+                <TextView
+                    android:id="@+id/tv_take_order"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:background="@color/color_c62828"
+                    android:textSize="@dimen/sp_16"
+                    android:text="立即购买"/>
+
+            </LinearLayout>
+
+
         </LinearLayout>
 
+
     </androidx.core.widget.NestedScrollView>
-
-
 
 </LinearLayout>

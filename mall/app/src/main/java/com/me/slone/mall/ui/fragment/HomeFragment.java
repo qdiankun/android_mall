@@ -131,11 +131,9 @@ public class HomeFragment extends MyFragment<HomeActivity> {
         mGroupRv = findViewById(R.id.rv_group);
         mGroupAdapter = new GroupAdapter(getContext());
         mGroupAdapter.setData(mGroupList);
-        mGroupAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-
-            }
+        mGroupAdapter.setOnItemClickListener((recyclerView, itemView, position) -> {
+            int goodId = mGroupList.get(position).getId();
+            jumpGoodsDetail(goodId);
         });
         mGroupRv.addItemDecoration(getVerticalGrayDividerItem());
         mGroupRv.setAdapter(mGroupAdapter);
@@ -145,16 +143,9 @@ public class HomeFragment extends MyFragment<HomeActivity> {
         mNewGoodsRv.setLayoutManager(newGoodsManager);
         mNewGoodsAdapter = new NewGoodsAdapter(getContext());
         mNewGoodsAdapter.setData(mNewGoodsList);
-        mNewGoodsAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-                Bundle bundle = new Bundle();
-                bundle.putInt("goodId",mNewGoodsList.get(position).getId());
-                Intent intent = new Intent(getActivity(),GoodDetailActivity.class);
-                intent.putExtras(bundle);
-                startActivity(intent);
-
-            }
+        mNewGoodsAdapter.setOnItemClickListener((recyclerView, itemView, position) -> {
+            int goodId = mNewGoodsList.get(position).getId();
+            jumpGoodsDetail(goodId);
         });
         mNewGoodsRv.addItemDecoration(new GridSpaceDecoration(getContext()));
         mNewGoodsRv.setAdapter(mNewGoodsAdapter);
@@ -177,11 +168,9 @@ public class HomeFragment extends MyFragment<HomeActivity> {
         mHotGoodsRv = findViewById(R.id.rv_hotgoods);
         mHotGoodsAdapter = new HotGoodsAdapter(getContext());
         mHotGoodsAdapter.setData(mHotGoodsList);
-        mHotGoodsAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-
-            }
+        mHotGoodsAdapter.setOnItemClickListener((recyclerView, itemView, position) -> {
+            int goodId = mHotGoodsList.get(position).getId();
+            jumpGoodsDetail(goodId);
         });
         mHotGoodsRv.addItemDecoration(getVerticalGrayDividerItem());
         mHotGoodsRv.setAdapter(mHotGoodsAdapter);
@@ -199,6 +188,14 @@ public class HomeFragment extends MyFragment<HomeActivity> {
         mFloorRv.setAdapter(mFloorAdapter);
 
 
+    }
+
+    private void jumpGoodsDetail(int goodId) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("goodId",goodId);
+        Intent intent = new Intent(getActivity(), GoodDetailActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     private DividerItemDecoration getVerticalGrayDividerItem() {

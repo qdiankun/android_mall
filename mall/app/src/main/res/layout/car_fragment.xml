@@ -84,7 +84,7 @@
                 tools:text="¥ 3236"/>
 
             <TextView
-                android:id="@+id/tv_order"
+                android:id="@+id/tv_take_order"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
@@ -115,10 +115,10 @@
 
 
             <TextView
-                android:id="@+id/tv_order_edit"
+                android:id="@+id/tv_add_order"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_toLeftOf="@id/tv_order"
+                android:layout_toLeftOf="@id/tv_take_order"
                 android:layout_marginRight="@dimen/dp_20"
                 android:gravity="center"
                 android:textColor="@color/black"

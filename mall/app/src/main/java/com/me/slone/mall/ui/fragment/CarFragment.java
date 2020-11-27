@@ -69,8 +69,8 @@ public class CarFragment extends MyFragment<HomeActivity> {
         mCartRv = findViewById(R.id.ll_cartlist);
         mPriceTv = findViewById(R.id.tv_cart_price);
         mDeleteTv = findViewById(R.id.tv_deleteall);
-        mOrderEditTv = findViewById(R.id.tv_order_edit);
-        mOrderTv = findViewById(R.id.tv_order);
+        mOrderEditTv = findViewById(R.id.tv_add_order);
+        mOrderTv = findViewById(R.id.tv_take_order);
         mOrderRl = findViewById(R.id.rl_order);
         if (!UserConstants.isLogin()) {
             mNotLoginLl.setVisibility(View.VISIBLE);

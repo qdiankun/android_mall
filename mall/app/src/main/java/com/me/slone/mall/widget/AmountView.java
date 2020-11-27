@@ -137,4 +137,8 @@ public class AmountView extends LinearLayout implements View.OnClickListener, Te
         etAmount.setText(String.valueOf(number));
     }
 
+
+    public int getAmout(){
+        return Integer.valueOf(etAmount.getText().toString().trim());
+    }
 }

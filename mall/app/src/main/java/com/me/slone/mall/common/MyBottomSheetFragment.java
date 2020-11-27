@@ -16,6 +16,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
+import com.blankj.utilcode.util.SizeUtils;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -31,23 +32,28 @@ import java.util.ArrayList;
 /**
  * Author：diankun
  * Time：20-11-12 下午1:56
- * Description:
+ * Description: 添加购物车
  */
 public class MyBottomSheetFragment extends BottomSheetDialogFragment {
 
     private Context mContext;
-    private TextView priceTv,specificationTv;
+    private TextView priceTv, specificationTv, addOrderTv, takeOrderTv;
     private View view;
     private AmountView amountView;
     private ArrayList<ProductBean> productBeans;
     private static String ARG_PRODUCTS = "arg_products";
+    private OrderClickListener orderClickListener;
 
     public static MyBottomSheetFragment getInstance(ArrayList<ProductBean> productBeans) {
         MyBottomSheetFragment myBottomSheetFragment = new MyBottomSheetFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable(ARG_PRODUCTS,productBeans);
+        bundle.putSerializable(ARG_PRODUCTS, productBeans);
         myBottomSheetFragment.setArguments(bundle);
         return myBottomSheetFragment;
+    }
+
+    public void setOrderClickListener(OrderClickListener orderClickListener) {
+        this.orderClickListener = orderClickListener;
     }
 
     @Override
@@ -82,7 +88,7 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
     protected int getPeekHeight() {
         int peekHeight = getResources().getDisplayMetrics().heightPixels;
         //设置弹窗高度为屏幕高度的3/4
-        return peekHeight - peekHeight / 2;
+        return peekHeight - peekHeight / 2 + SizeUtils.dp2px(20);
     }
 
 
@@ -99,7 +105,7 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
 
     private void initData() {
         Bundle arguments = getArguments();
-        if(arguments == null){
+        if (arguments == null) {
             return;
         }
         productBeans = (ArrayList<ProductBean>) arguments.getSerializable(ARG_PRODUCTS);
@@ -107,12 +113,21 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
 
     private void initViews(View view) {
         ProductBean productBean = productBeans.get(0);
-
         amountView = view.findViewById(R.id.amount_view);
         priceTv = view.findViewById(R.id.tv_price);
         specificationTv = view.findViewById(R.id.tv_specification);
-        priceTv.setText("价格：¥ "+productBean.getPrice());
-        specificationTv.setText("已选择： "+productBean.getSpecifications().get(0));
+        addOrderTv = view.findViewById(R.id.tv_add_order);
+        takeOrderTv = view.findViewById(R.id.tv_take_order);
+        addOrderTv.setOnClickListener(view12 -> {
+            if(orderClickListener!=null){
+                orderClickListener.addOrder(amountView.getAmout());
+            }
+        });
+        takeOrderTv.setOnClickListener(view13 -> {
+
+        });
+        priceTv.setText("价格：¥ " + productBean.getPrice());
+        specificationTv.setText("已选择： " + productBean.getSpecifications().get(0));
         ImageView closeIv = view.findViewById(R.id.iv_close);
         closeIv.setOnClickListener(view1 -> dismiss());
         ImageView productIv = view.findViewById(R.id.iv_product);
@@ -120,6 +135,10 @@ public class MyBottomSheetFragment extends BottomSheetDialogFragment {
                 .load(productBean.getUrl())
                 .transform(new RoundedCorners((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20, this.getResources().getDisplayMetrics())))
                 .into(productIv);
+    }
+
+    public interface OrderClickListener {
+        void addOrder(int mount);
     }
 
 }

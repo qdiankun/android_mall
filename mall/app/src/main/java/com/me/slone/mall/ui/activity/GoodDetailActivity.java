@@ -17,6 +17,8 @@ import com.me.slone.mall.R;
 import com.me.slone.mall.common.MyActivity;
 import com.me.slone.mall.common.MyBottomSheetFragment;
 import com.me.slone.mall.http.model.HttpData;
+import com.me.slone.mall.http.request.CartAddApi;
+import com.me.slone.mall.http.request.GoodCountApi;
 import com.me.slone.mall.http.request.GoodDetailApi;
 import com.me.slone.mall.http.response.goodsdetail.AttibuteBean;
 import com.me.slone.mall.http.response.goodsdetail.GoodsDetailBean;
@@ -39,7 +41,7 @@ public class GoodDetailActivity extends MyActivity {
 
     private Banner mBanner;
     private TextView mTitleTv, mBriefTv, mPrice1Tv, mPrice2Tv, mBrandTv, mSpecificationTv;
-    private TextView mAddCarTv, mBuyTv;
+    private TextView mAddOrderTv, mTakeOrderTv, mBageTv;
     private WebView mWebView;
     private RelativeLayout mSpecificationRl;
     private LinearLayout mAttributeLl;
@@ -60,32 +62,24 @@ public class GoodDetailActivity extends MyActivity {
         mBrandTv = findViewById(R.id.tv_brand);
         mWebView = findViewById(R.id.webview);
         mSpecificationTv = findViewById(R.id.tv_specification);
-        mAddCarTv = findViewById(R.id.tv_order_edit);
-        mBuyTv = findViewById(R.id.tv_order);
+        mAddOrderTv = findViewById(R.id.tv_add_order);
+        mTakeOrderTv = findViewById(R.id.tv_take_order);
         mSpecificationRl = findViewById(R.id.rl_specification);
         mAttributeLl = findViewById(R.id.ll_attribute);
+        mBageTv = findViewById(R.id.tv_badge);
         initBanner();
         initWebView();
-        initListener();
-    }
-
-    private void initListener() {
-        mAddCarTv.setOnClickListener(this);
-        mBuyTv.setOnClickListener(this);
-        mSpecificationRl.setOnClickListener(this);
+        setOnClickListener(mAddOrderTv, mTakeOrderTv, mSpecificationRl);
     }
 
     private void initBanner() {
         mBanner = findViewById(R.id.banner);
-        mBanner.post(new Runnable() {
-            @Override
-            public void run() {
-                int screenHeight = DisplayUtil.getScreenContentHeight(GoodDetailActivity.this);
-                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mBanner.getLayoutParams();
-                params.height = screenHeight * 1 / 3;
-                mBanner.setLayoutParams(params);
-                mBanner.invalidate();
-            }
+        mBanner.post(() -> {
+            int screenHeight = DisplayUtil.getScreenContentHeight(GoodDetailActivity.this);
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mBanner.getLayoutParams();
+            params.height = screenHeight * 1 / 3;
+            mBanner.setLayoutParams(params);
+            mBanner.invalidate();
         });
     }
 
@@ -154,6 +148,19 @@ public class GoodDetailActivity extends MyActivity {
     protected void initData() {
         mGoodId = (int) getIntent().getExtras().get("goodId");
         getGoodDetail();
+        getGoodCount();
+    }
+
+    private void getGoodCount() {
+        EasyHttp.get(this)
+                .api(new GoodCountApi())
+                .request(new HttpCallback<HttpData<Integer>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<Integer> result) {
+                        super.onSucceed(result);
+                        updateGoodCount(result.getData());
+                    }
+                });
     }
 
     private void getGoodDetail() {
@@ -176,9 +183,9 @@ public class GoodDetailActivity extends MyActivity {
 
     private void refreshAttribute() {
         List<AttibuteBean> attribute = mGoodsDetailBean.getAttribute();
-        if(attribute == null || attribute.isEmpty()){
+        if (attribute == null || attribute.isEmpty()) {
             mAttributeLl.setVisibility(View.GONE);
-        } else{
+        } else {
             mAttributeLl.setVisibility(View.VISIBLE);
         }
     }
@@ -208,23 +215,47 @@ public class GoodDetailActivity extends MyActivity {
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.tv_order_edit) {
+        if (id == R.id.tv_add_order) {
             showAddCarDialog();
         } else if (id == R.id.rl_specification) {
-            showSpecification();
+            showAddCarDialog();
         }
     }
 
-    private void showSpecification() {
+    private void showAddCarDialog() {
         ArrayList<ProductBean> productList = mGoodsDetailBean.getProductList();
         if (productList == null && productList.isEmpty()) {
             return;
         }
         MyBottomSheetFragment bottomSheetFragment = MyBottomSheetFragment.getInstance(productList);
         bottomSheetFragment.show(getSupportFragmentManager(), "bottomdialog");
+        bottomSheetFragment.setOrderClickListener(mount -> {
+            addOrderList(mount, bottomSheetFragment);
+        });
     }
 
-    private void showAddCarDialog() {
+    private void addOrderList(int mount, MyBottomSheetFragment bottomSheetFragment) {
+        EasyHttp.post(this)
+                .api(new CartAddApi()
+                        .setGoodsId(mGoodId)
+                        .setNumber(mount)
+                        .setProductId(mGoodsDetailBean.getProductList().get(0).getId()))
+                .request(new HttpCallback<HttpData<Integer>>(this) {
 
+                    @Override
+                    public void onSucceed(HttpData<Integer> data) {
+                        super.onSucceed(data);
+                        updateGoodCount(data.getData());
+                        bottomSheetFragment.dismiss();
+                    }
+                });
+    }
+
+    private void updateGoodCount(int count) {
+        if (count <= 0) {
+            mBageTv.setText(String.valueOf(count));
+        } else {
+            mBageTv.setText(String.valueOf(count));
+        }
     }
 }
