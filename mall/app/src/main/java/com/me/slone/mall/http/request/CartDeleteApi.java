@@ -2,6 +2,8 @@ package com.me.slone.mall.http.request;
 
 import com.hjq.http.config.IRequestApi;
 
+import java.util.List;
+
 /**
  * Author：diankun
  * Time：20-11-25 下午3:48
@@ -12,16 +14,16 @@ public class CartDeleteApi implements IRequestApi {
     /**
      * { productIds: xxx }
      */
-    private int productIds;
+    private List<Integer> productIds;
 
 
     @Override
     public String getApi() {
-        return "cart/update";
+        return "cart/delete";
     }
 
 
-    public CartDeleteApi setProductId(int productIds) {
+    public CartDeleteApi setProductId(List<Integer> productIds) {
         this.productIds = productIds;
         return this;
     }

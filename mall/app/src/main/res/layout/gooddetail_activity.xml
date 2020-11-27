@@ -56,6 +56,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
+            <LinearLayout
+                android:id="@+id/ll_attribute"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"/>
+
             <WebView
                 android:id="@+id/webview"
                 android:layout_marginTop="10dp"
@@ -123,7 +129,7 @@
         </RelativeLayout>
 
         <TextView
-            android:id="@+id/tv_addcar"
+            android:id="@+id/tv_order_edit"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="match_parent"
@@ -134,7 +140,7 @@
             android:text="加入购物车"/>
 
         <TextView
-            android:id="@+id/tv_buy"
+            android:id="@+id/tv_order"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="match_parent"

@@ -16,6 +16,7 @@ import com.me.slone.mall.common.MyFragment;
 import com.me.slone.mall.common.UserConstants;
 import com.me.slone.mall.http.model.HttpData;
 import com.me.slone.mall.http.request.CartCheckApi;
+import com.me.slone.mall.http.request.CartDeleteApi;
 import com.me.slone.mall.http.request.CartListApi;
 import com.me.slone.mall.http.response.cart.CartBean;
 import com.me.slone.mall.http.response.cart.CartListBean;
@@ -34,7 +35,7 @@ import java.util.List;
 public class CarFragment extends MyFragment<HomeActivity> {
 
     private TitleBar mTitleBar;
-    private TextView mPriceTv;
+    private TextView mPriceTv, mDeleteTv, mOrderEditTv, mOrderTv;
     private LinearLayout mNotLoginLl;
     private AppCompatButton mLoginBtn;
     private RecyclerView mCartRv;
@@ -57,10 +58,13 @@ public class CarFragment extends MyFragment<HomeActivity> {
         mLoginBtn = findViewById(R.id.btn_login_commit);
         mCartRv = findViewById(R.id.ll_cartlist);
         mPriceTv = findViewById(R.id.tv_cart_price);
+        mDeleteTv = findViewById(R.id.tv_deleteall);
+        mOrderEditTv = findViewById(R.id.tv_order_edit);
+        mOrderTv = findViewById(R.id.tv_order);
         if (!UserConstants.isLogin()) {
             mNotLoginLl.setVisibility(View.VISIBLE);
         }
-        setOnClickListener(mLoginBtn);
+        setOnClickListener(mLoginBtn, mOrderTv, mDeleteTv);
         mCartListAdapter = new CartListAdapter(getContext());
         mCartListAdapter.setData(mCartBeansList);
         mCartListAdapter.setOnChildClickListener(R.id.cb_select, (recyclerView, childView, position) -> {
@@ -68,7 +72,29 @@ public class CarFragment extends MyFragment<HomeActivity> {
             CartBean cartBean = mCartBeansList.get(position);
             checkCart(checkBox.isChecked(), cartBean);
         });
+        mCartListAdapter.setOnChildClickListener(R.id.ll_delete, (recyclerView, childView, position) -> {
+            //toast("删除-" + position);
+            List<Integer> productIds = new ArrayList<>();
+            productIds.add(mCartBeansList.get(position).getProductId());
+            deleteCart(productIds);
+        });
         mCartRv.setAdapter(mCartListAdapter);
+    }
+
+    private void deleteCart(List<Integer> productIds) {
+        EasyHttp.post(this)
+                .api(new CartDeleteApi()
+                        .setProductId(productIds))
+                .request(new HttpCallback<HttpData<CartListBean>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<CartListBean> data) {
+                        super.onSucceed(data);
+                        CartListBean cartListBean = data.getData();
+                        refreshCartList(cartListBean);
+                    }
+
+                });
     }
 
     @Override
@@ -77,9 +103,15 @@ public class CarFragment extends MyFragment<HomeActivity> {
         if ("编辑".equals(rightTitle)) {
             mTitleBar.setRightTitle("完成");
             mCartListAdapter.setEditCart(true);
+            mOrderTv.setVisibility(View.GONE);
+            mOrderEditTv.setVisibility(View.GONE);
+            mDeleteTv.setVisibility(View.VISIBLE);
         } else if ("完成".equals(rightTitle)) {
             mTitleBar.setRightTitle("编辑");
             mCartListAdapter.setEditCart(false);
+            mOrderTv.setVisibility(View.VISIBLE);
+            mOrderEditTv.setVisibility(View.VISIBLE);
+            mDeleteTv.setVisibility(View.GONE);
         }
     }
 
@@ -101,34 +133,37 @@ public class CarFragment extends MyFragment<HomeActivity> {
                 }
             }
         }
-        EasyHttp.post(this)
-                .api(new CartCheckApi()
-                        .setProductIds(checkedProductIds)
-                        .setIsChecked(1))
-                .request(new HttpCallback<HttpData<CartListBean>>(this) {
+        if (!checkedProductIds.isEmpty()) {
+            EasyHttp.post(this)
+                    .api(new CartCheckApi()
+                            .setProductIds(checkedProductIds)
+                            .setIsChecked(1))
+                    .request(new HttpCallback<HttpData<CartListBean>>(this) {
 
-                    @Override
-                    public void onSucceed(HttpData<CartListBean> data) {
-                        super.onSucceed(data);
-                        CartListBean cartListBean = data.getData();
-                        refreshCartList(cartListBean);
-                    }
+                        @Override
+                        public void onSucceed(HttpData<CartListBean> data) {
+                            super.onSucceed(data);
+                            CartListBean cartListBean = data.getData();
+                            refreshCartList(cartListBean);
+                        }
 
-                });
-        EasyHttp.post(this)
-                .api(new CartCheckApi()
-                        .setProductIds(unCheckedProductIds)
-                        .setIsChecked(0))
-                .request(new HttpCallback<HttpData<CartListBean>>(this) {
+                    });
+        }
+        if (!unCheckedProductIds.isEmpty()) {
+            EasyHttp.post(this)
+                    .api(new CartCheckApi()
+                            .setProductIds(unCheckedProductIds)
+                            .setIsChecked(0))
+                    .request(new HttpCallback<HttpData<CartListBean>>(this) {
 
-                    @Override
-                    public void onSucceed(HttpData<CartListBean> data) {
-                        super.onSucceed(data);
-                        CartListBean cartListBean = data.getData();
-                        refreshCartList(cartListBean);
-                    }
-
-                });
+                        @Override
+                        public void onSucceed(HttpData<CartListBean> data) {
+                            super.onSucceed(data);
+                            CartListBean cartListBean = data.getData();
+                            refreshCartList(cartListBean);
+                        }
+                    });
+        }
     }
 
     @Override
@@ -176,6 +211,18 @@ public class CarFragment extends MyFragment<HomeActivity> {
     public void onClick(View v) {
         if (mLoginBtn == v) {
             startActivity(LoginActivity.class);
+        } else if (mDeleteTv == v) {
+            deleteAllCheck();
         }
+    }
+
+    private void deleteAllCheck() {
+        List<Integer> checkedProductIds = new ArrayList<>();
+        for (CartBean cart : mCartBeansList) {
+            if (cart.isChecked()) {
+                checkedProductIds.add(cart.getProductId());
+            }
+        }
+        deleteCart(checkedProductIds);
     }
 }

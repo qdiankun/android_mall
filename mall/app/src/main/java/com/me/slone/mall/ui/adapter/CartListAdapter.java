@@ -79,6 +79,7 @@ public class CartListAdapter extends MyAdapter<CartBean> {
             briefTv.setText(specSb.toString());
             countTv.setText("x" + cartBean.getNumber());
             priceTv.setText("¥" + cartBean.getPrice());
+            amountView.setAmount(cartBean.getNumber());
             checkCb.setChecked(cartBean.isChecked());
             GlideApp.with(getContext())
                     .load(cartBean.getPicUrl())

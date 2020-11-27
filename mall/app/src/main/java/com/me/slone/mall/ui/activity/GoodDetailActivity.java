@@ -18,6 +18,7 @@ import com.me.slone.mall.common.MyActivity;
 import com.me.slone.mall.common.MyBottomSheetFragment;
 import com.me.slone.mall.http.model.HttpData;
 import com.me.slone.mall.http.request.GoodDetailApi;
+import com.me.slone.mall.http.response.goodsdetail.AttibuteBean;
 import com.me.slone.mall.http.response.goodsdetail.GoodsDetailBean;
 import com.me.slone.mall.http.response.goodsdetail.GoodsDetailInfoBean;
 import com.me.slone.mall.http.response.goodsdetail.ProductBean;
@@ -27,6 +28,7 @@ import com.ms.banner.Banner;
 import com.ms.banner.BannerConfig;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Author：diankun
@@ -40,6 +42,7 @@ public class GoodDetailActivity extends MyActivity {
     private TextView mAddCarTv, mBuyTv;
     private WebView mWebView;
     private RelativeLayout mSpecificationRl;
+    private LinearLayout mAttributeLl;
     private GoodsDetailBean mGoodsDetailBean;
     private int mGoodId;
 
@@ -57,9 +60,10 @@ public class GoodDetailActivity extends MyActivity {
         mBrandTv = findViewById(R.id.tv_brand);
         mWebView = findViewById(R.id.webview);
         mSpecificationTv = findViewById(R.id.tv_specification);
-        mAddCarTv = findViewById(R.id.tv_addcar);
-        mBuyTv = findViewById(R.id.tv_buy);
+        mAddCarTv = findViewById(R.id.tv_order_edit);
+        mBuyTv = findViewById(R.id.tv_order);
         mSpecificationRl = findViewById(R.id.rl_specification);
+        mAttributeLl = findViewById(R.id.ll_attribute);
         initBanner();
         initWebView();
         initListener();
@@ -165,8 +169,18 @@ public class GoodDetailActivity extends MyActivity {
                             return;
                         }
                         refreshBaner();
+                        refreshAttribute();
                     }
                 });
+    }
+
+    private void refreshAttribute() {
+        List<AttibuteBean> attribute = mGoodsDetailBean.getAttribute();
+        if(attribute == null || attribute.isEmpty()){
+            mAttributeLl.setVisibility(View.GONE);
+        } else{
+            mAttributeLl.setVisibility(View.VISIBLE);
+        }
     }
 
     private void refreshBaner() {
@@ -194,7 +208,7 @@ public class GoodDetailActivity extends MyActivity {
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        if (id == R.id.tv_addcar) {
+        if (id == R.id.tv_order_edit) {
             showAddCarDialog();
         } else if (id == R.id.rl_specification) {
             showSpecification();

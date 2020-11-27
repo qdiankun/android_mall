@@ -83,7 +83,7 @@
                 tools:text="¥ 3236"/>
 
             <TextView
-                android:id="@+id/tv_buy"
+                android:id="@+id/tv_order"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
@@ -96,11 +96,28 @@
                 android:textSize="@dimen/sp_16"
                 android:text="下单"/>
 
+
             <TextView
-                android:id="@+id/tv_addcar"
+                android:id="@+id/tv_deleteall"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_toLeftOf="@id/tv_buy"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/white"
+                android:layout_margin="@dimen/dp_5"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_20"
+                android:paddingRight="@dimen/dp_20"
+                android:background="@color/color_c62828"
+                android:textSize="@dimen/sp_16"
+                android:visibility="gone"
+                android:text="删除"/>
+
+
+            <TextView
+                android:id="@+id/tv_order_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@id/tv_order"
                 android:layout_marginRight="@dimen/dp_20"
                 android:gravity="center"
                 android:textColor="@color/black"
