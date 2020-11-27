@@ -23,7 +23,7 @@ public class AmountView extends LinearLayout implements View.OnClickListener, Te
 
     private static final String TAG = "AmountView";
     private int amount = 1; //购买数量
-    private int goodsStorage = 1; //商品库存
+    private int goodsStorage = Integer.MAX_VALUE; //商品库存
 
     private OnAmountChangeListener mListener;
 
@@ -79,6 +79,7 @@ public class AmountView extends LinearLayout implements View.OnClickListener, Te
     @Override
     public void onClick(View v) {
         int i = v.getId();
+        int oldAmount = Integer.valueOf(etAmount.getText().toString().trim());
         if (i == R.id.btnDecrease) {
             if (amount > 1) {
                 amount--;
@@ -93,7 +94,7 @@ public class AmountView extends LinearLayout implements View.OnClickListener, Te
 
         etAmount.clearFocus();
 
-        if (mListener != null) {
+        if (mListener != null && oldAmount != amount) {
             mListener.onAmountChange(this, amount);
         }
     }
@@ -114,13 +115,13 @@ public class AmountView extends LinearLayout implements View.OnClickListener, Te
             return;
         amount = Integer.valueOf(s.toString());
 //        if (amount > goodsStorage) {
-            etAmount.setText(goodsStorage + "");
+//            etAmount.setText(goodsStorage + "");
 //            return;
 //        }
 
-        if (mListener != null) {
-            mListener.onAmountChange(this, amount);
-        }
+//        if (mListener != null) {
+//            mListener.onAmountChange(this, amount);
+//        }
     }
 
 

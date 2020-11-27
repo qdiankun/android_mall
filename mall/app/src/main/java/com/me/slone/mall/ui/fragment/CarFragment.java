@@ -3,6 +3,7 @@ package com.me.slone.mall.ui.fragment;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.AppCompatButton;
@@ -18,6 +19,7 @@ import com.me.slone.mall.http.model.HttpData;
 import com.me.slone.mall.http.request.CartCheckApi;
 import com.me.slone.mall.http.request.CartDeleteApi;
 import com.me.slone.mall.http.request.CartListApi;
+import com.me.slone.mall.http.request.CartUpdateApi;
 import com.me.slone.mall.http.response.cart.CartBean;
 import com.me.slone.mall.http.response.cart.CartListBean;
 import com.me.slone.mall.ui.activity.HomeActivity;
@@ -39,8 +41,16 @@ public class CarFragment extends MyFragment<HomeActivity> {
     private LinearLayout mNotLoginLl;
     private AppCompatButton mLoginBtn;
     private RecyclerView mCartRv;
+    private RelativeLayout mOrderRl;
     private CartListAdapter mCartListAdapter;
     private List<CartBean> mCartBeansList = new ArrayList<>();
+    private Page mPage = Page.MODIFY;
+    //编辑数量
+    private boolean updateCart;
+
+    private enum Page {
+        MODIFY, FINISH
+    }
 
     public static CarFragment newInstance() {
         return new CarFragment();
@@ -61,6 +71,7 @@ public class CarFragment extends MyFragment<HomeActivity> {
         mDeleteTv = findViewById(R.id.tv_deleteall);
         mOrderEditTv = findViewById(R.id.tv_order_edit);
         mOrderTv = findViewById(R.id.tv_order);
+        mOrderRl = findViewById(R.id.rl_order);
         if (!UserConstants.isLogin()) {
             mNotLoginLl.setVisibility(View.VISIBLE);
         }
@@ -78,7 +89,28 @@ public class CarFragment extends MyFragment<HomeActivity> {
             productIds.add(mCartBeansList.get(position).getProductId());
             deleteCart(productIds);
         });
+        mCartListAdapter.setCartListAmountListener((view, amount, position) -> {
+            updateCart(amount, mCartBeansList.get(position));
+        });
         mCartRv.setAdapter(mCartListAdapter);
+    }
+
+    private void updateCart(int amount, CartBean cartBean) {
+        updateCart = true;
+        EasyHttp.post(this)
+                .api(new CartUpdateApi()
+                        .setNumber(amount)
+                        .setId(cartBean.getId())
+                        .setGoodsId(cartBean.getGoodsId())
+                        .setProductId(cartBean.getProductId()))
+                .request(new HttpCallback<HttpData<Void>>(this) {
+
+                    @Override
+                    public void onSucceed(HttpData<Void> data) {
+                        cartBean.setNumber(amount);
+                        getCartList();
+                    }
+                });
     }
 
     private void deleteCart(List<Integer> productIds) {
@@ -99,14 +131,15 @@ public class CarFragment extends MyFragment<HomeActivity> {
 
     @Override
     public void onRightClick(View v) {
-        CharSequence rightTitle = mTitleBar.getRightTitle();
-        if ("编辑".equals(rightTitle)) {
+        if (mPage == Page.MODIFY) {
+            mPage = Page.FINISH;
             mTitleBar.setRightTitle("完成");
             mCartListAdapter.setEditCart(true);
             mOrderTv.setVisibility(View.GONE);
             mOrderEditTv.setVisibility(View.GONE);
             mDeleteTv.setVisibility(View.VISIBLE);
-        } else if ("完成".equals(rightTitle)) {
+        } else if (mPage == Page.FINISH) {
+            mPage = Page.MODIFY;
             mTitleBar.setRightTitle("编辑");
             mCartListAdapter.setEditCart(false);
             mOrderTv.setVisibility(View.VISIBLE);
@@ -134,6 +167,7 @@ public class CarFragment extends MyFragment<HomeActivity> {
             }
         }
         if (!checkedProductIds.isEmpty()) {
+            updateCart = true;
             EasyHttp.post(this)
                     .api(new CartCheckApi()
                             .setProductIds(checkedProductIds)
@@ -150,6 +184,7 @@ public class CarFragment extends MyFragment<HomeActivity> {
                     });
         }
         if (!unCheckedProductIds.isEmpty()) {
+            updateCart = true;
             EasyHttp.post(this)
                     .api(new CartCheckApi()
                             .setProductIds(unCheckedProductIds)
@@ -169,6 +204,7 @@ public class CarFragment extends MyFragment<HomeActivity> {
     @Override
     protected void initData() {
         if (UserConstants.isLogin()) {
+            updateCart = false;
             getCartList();
         }
     }
@@ -192,9 +228,15 @@ public class CarFragment extends MyFragment<HomeActivity> {
         }
         if (cartListBean.getCartList() == null || cartListBean.getCartList().isEmpty()) {
             mTitleBar.setRightTitle("");
-            return;
+            mOrderRl.setVisibility(View.GONE);
+        } else {
+            mOrderRl.setVisibility(View.VISIBLE);
         }
-        mTitleBar.setRightTitle("编辑");
+        if (updateCart) {
+            mTitleBar.setRightTitle("完成");
+        } else {
+            mTitleBar.setRightTitle("编辑");
+        }
         mPriceTv.setText("¥ " + cartListBean.getCartTotal().getCheckedGoodsAmount());
         mCartBeansList.clear();
         mCartBeansList.addAll(cartListBean.getCartList());

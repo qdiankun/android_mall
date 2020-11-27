@@ -23,10 +23,15 @@ import com.me.slone.mall.widget.AmountView;
  */
 public class CartListAdapter extends MyAdapter<CartBean> {
 
-    private boolean editCart;
+    private boolean mEditCart;
+    private CartListAmountListener mCartListAmountListener;
 
     public CartListAdapter(@NonNull Context context) {
         super(context);
+    }
+
+    public void setCartListAmountListener(CartListAmountListener mCartListAmountListener) {
+        this.mCartListAmountListener = mCartListAmountListener;
     }
 
     @NonNull
@@ -35,8 +40,8 @@ public class CartListAdapter extends MyAdapter<CartBean> {
         return new ViewHolder();
     }
 
-    public void setEditCart(boolean editCart) {
-        this.editCart = editCart;
+    public void setEditCart(boolean mEditCart) {
+        this.mEditCart = mEditCart;
         notifyDataSetChanged();
     }
 
@@ -63,7 +68,7 @@ public class CartListAdapter extends MyAdapter<CartBean> {
             deleteLl = (LinearLayout) findViewById(R.id.ll_delete);
             amountView = (AmountView) findViewById(R.id.amount_view);
 
-            if (editCart) {
+            if (mEditCart) {
                 deleteLl.setVisibility(View.VISIBLE);
                 amountView.setVisibility(View.VISIBLE);
             } else {
@@ -80,10 +85,22 @@ public class CartListAdapter extends MyAdapter<CartBean> {
             countTv.setText("x" + cartBean.getNumber());
             priceTv.setText("¥" + cartBean.getPrice());
             amountView.setAmount(cartBean.getNumber());
+            amountView.setOnAmountChangeListener(new AmountView.OnAmountChangeListener() {
+                @Override
+                public void onAmountChange(View view, int amount) {
+                    if(mCartListAmountListener!=null){
+                        mCartListAmountListener.onAmountChange(view,amount,position);
+                    }
+                }
+            });
             checkCb.setChecked(cartBean.isChecked());
             GlideApp.with(getContext())
                     .load(cartBean.getPicUrl())
                     .into(goodsIv);
         }
+    }
+
+    public interface CartListAmountListener{
+        void onAmountChange(View view, int amount,int position);
     }
 }
