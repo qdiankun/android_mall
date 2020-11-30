@@ -1,11 +1,13 @@
 package com.me.slone.mall.http.response.me;
 
+import java.io.Serializable;
+
 /**
  * Author：diankun
  * Time：20-11-30 上午9:57
  * Description: 地址
  */
-public class AddressBean {
+public class AddressBean implements Serializable {
     /**
      *                 "id": 2,
      *                 "name": "java",

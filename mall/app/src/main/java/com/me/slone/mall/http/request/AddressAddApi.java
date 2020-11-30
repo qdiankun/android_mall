@@ -1,5 +1,7 @@
 package com.me.slone.mall.http.request;
 
+import android.text.TextUtils;
+
 import com.hjq.http.config.IRequestApi;
 
 /**
@@ -9,6 +11,7 @@ import com.hjq.http.config.IRequestApi;
  */
 public class AddressAddApi implements IRequestApi {
 
+    private int id;
     private String name;
     private String tel;
     private String province;
@@ -21,6 +24,14 @@ public class AddressAddApi implements IRequestApi {
     @Override
     public String getApi() {
         return "address/save";
+    }
+
+    public AddressAddApi setId(int id) {
+        if (id <= 0) {
+            return this;
+        }
+        this.id = id;
+        return this;
     }
 
     public AddressAddApi setName(String name) {

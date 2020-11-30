@@ -123,6 +123,7 @@ public abstract class BaseActivity extends AppCompatActivity
         startActivityForResult(new Intent(this, clazz), null, callback);
     }
 
+
     public void startActivityForResult(Intent intent, OnActivityCallback callback) {
         startActivityForResult(intent, null, callback);
     }

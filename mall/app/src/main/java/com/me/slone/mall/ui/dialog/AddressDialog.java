@@ -22,6 +22,7 @@ import com.hjq.base.BaseDialog;
 import com.me.slone.mall.R;
 import com.me.slone.mall.aop.SingleClick;
 import com.me.slone.mall.common.MyAdapter;
+import com.me.slone.mall.utils.GetJsonDataUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -522,17 +523,18 @@ public final class AddressDialog {
          */
         private static JSONArray getProvinceJson(Context context) {
             try {
-                InputStream inputStream = context.getResources().openRawResource(R.raw.province);
-                ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-                byte[] buffer = new byte[512];
-                int length;
-                while ((length = inputStream.read(buffer)) != -1) {
-                    outStream.write(buffer, 0, length);
-                }
-                outStream.close();
-                inputStream.close();
-                return new JSONArray(outStream.toString());
-            } catch (IOException | JSONException e) {
+//                InputStream inputStream = context.getResources().openRawResource(R.raw.province);
+//                ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+//                byte[] buffer = new byte[512];
+//                int length;
+//                while ((length = inputStream.read(buffer)) != -1) {
+//                    outStream.write(buffer, 0, length);
+//                }
+//                outStream.close();
+//                inputStream.close();
+                String json = new GetJsonDataUtil().getJson(context,"province.json");
+                return new JSONArray(json);
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
             return null;

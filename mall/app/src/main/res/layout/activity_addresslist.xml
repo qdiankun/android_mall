@@ -17,7 +17,8 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ll_cartlist"
+        android:id="@+id/rl_addresslist"
+        android:layout_below="@id/titlebar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

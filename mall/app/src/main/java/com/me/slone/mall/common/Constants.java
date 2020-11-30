@@ -16,4 +16,8 @@ public class Constants {
     public static final String SP_KEY_SEX = "sp_key_sex";
     public static final String SP_KEY_TOKEN = "sp_key_token";
 
+    public static final int REQUEST_ADDRESS_LIST = 1001;
+    public static final int RESULT_ADDRESS_ADD = 1002;
+    public static final int RESULT_ADDRESS_UPDATE = 1003;
+
 }
