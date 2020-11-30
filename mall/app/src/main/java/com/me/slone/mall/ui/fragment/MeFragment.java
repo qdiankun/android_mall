@@ -4,10 +4,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hjq.http.EasyHttp;
+import com.hjq.http.listener.HttpCallback;
 import com.hjq.widget.layout.SettingBar;
 import com.me.slone.mall.R;
 import com.me.slone.mall.common.MyFragment;
 import com.me.slone.mall.http.glide.GlideApp;
+import com.me.slone.mall.http.model.HttpData;
+import com.me.slone.mall.http.request.UserInfoApi;
+import com.me.slone.mall.http.response.me.UserInfo;
 import com.me.slone.mall.ui.activity.AddressListActivity;
 import com.me.slone.mall.ui.activity.HomeActivity;
 
@@ -46,7 +51,27 @@ public class MeFragment extends MyFragment<HomeActivity> {
 
     @Override
     protected void initData() {
+        getUserInfo();
+    }
 
+    private void getUserInfo() {
+        EasyHttp.get(this)
+                .api(new UserInfoApi())
+                .request(new HttpCallback<HttpData<UserInfo>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<UserInfo> result) {
+                        super.onSucceed(result);
+                        refreshUserInfo(result.getData());
+                    }
+                });
+    }
+
+    private void refreshUserInfo(UserInfo userInfo) {
+        mNickTv.setText(userInfo.getNickName());
+        GlideApp.with(getContext())
+                .load(userInfo.getAvatar())
+                .circleCrop()
+                .into(mAvatarIv);
     }
 
     @Override
@@ -57,7 +82,7 @@ public class MeFragment extends MyFragment<HomeActivity> {
 
     @Override
     public void onClick(View v) {
-        if(v == mAddressSb){
+        if (v == mAddressSb) {
             startActivity(AddressListActivity.class);
         }
     }

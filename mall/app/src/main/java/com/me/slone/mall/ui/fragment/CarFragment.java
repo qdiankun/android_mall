@@ -72,6 +72,7 @@ public class CarFragment extends MyFragment<HomeActivity> {
         mOrderEditTv = findViewById(R.id.tv_add_order);
         mOrderTv = findViewById(R.id.tv_take_order);
         mOrderRl = findViewById(R.id.rl_order);
+        mOrderEditTv.setVisibility(View.GONE);
         if (!UserConstants.isLogin()) {
             mNotLoginLl.setVisibility(View.VISIBLE);
         }
@@ -136,14 +137,12 @@ public class CarFragment extends MyFragment<HomeActivity> {
             mTitleBar.setRightTitle("完成");
             mCartListAdapter.setEditCart(true);
             mOrderTv.setVisibility(View.GONE);
-            mOrderEditTv.setVisibility(View.GONE);
             mDeleteTv.setVisibility(View.VISIBLE);
         } else if (mPage == Page.FINISH) {
             mPage = Page.MODIFY;
             mTitleBar.setRightTitle("编辑");
             mCartListAdapter.setEditCart(false);
             mOrderTv.setVisibility(View.VISIBLE);
-            mOrderEditTv.setVisibility(View.VISIBLE);
             mDeleteTv.setVisibility(View.GONE);
         }
     }
@@ -202,11 +201,17 @@ public class CarFragment extends MyFragment<HomeActivity> {
     }
 
     @Override
-    protected void initData() {
+    public void onResume() {
+        super.onResume();
         if (UserConstants.isLogin()) {
             updateCart = false;
             getCartList();
         }
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     private void getCartList() {
