@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical"
+    tools:context=".ui.activity.AddressActivity">
+
+    <com.hjq.bar.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:backButton="false"
+        app:lineVisible="true"
+        app:title="@string/my_address_edit" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_5"
+        android:paddingBottom="@dimen/dp_5"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/my_address_name"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_address_name"
+            style="@style/EditTextStyle"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:hint="@string/my_address_name_hint"
+            android:singleLine="true" />
+
+    </LinearLayout>
+
+    <View style="@style/HorizontalLineStyle" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_5"
+        android:paddingBottom="@dimen/dp_5"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/my_address_phone"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_address_phone"
+            style="@style/EditTextStyle"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:hint="@string/my_address_phone_hint"
+            android:inputType="number"
+            android:singleLine="true" />
+
+    </LinearLayout>
+
+    <View style="@style/HorizontalLineStyle" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_5"
+        android:paddingBottom="@dimen/dp_5"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/my_address_localtion"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_address"
+            style="@style/EditTextStyle"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:hint="@string/my_address_localtion_hint"/>
+
+    </LinearLayout>
+
+    <View style="@style/HorizontalLineStyle" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_5"
+        android:paddingBottom="@dimen/dp_5"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/my_address_detail"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/et_address_detail"
+            style="@style/EditTextStyle"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:hint="@string/my_address_detail_hint"/>
+
+    </LinearLayout>
+
+    <View style="@style/HorizontalLineStyle" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/dp_20"
+        android:paddingRight="@dimen/dp_20"
+        android:paddingTop="@dimen/dp_5"
+        android:paddingBottom="@dimen/dp_5"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/my_address_default"/>
+
+
+        <com.hjq.widget.view.SwitchButton
+            android:id="@+id/sb_default_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:checked="true" />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_save"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_20"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_save_selector"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:text="@string/common_save" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_cancel"
+        style="@style/ButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/button_cancel_selector"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:textColor="@color/black"
+        android:text="@string/common_cancel" />
+
+
+</LinearLayout>

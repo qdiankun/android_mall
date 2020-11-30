@@ -27,6 +27,8 @@
     <string name="common_confirm">确定</string>
     <string name="common_cancel">取消</string>
 
+    <string name="common_save">保存</string>
+
     <string name="common_year">年</string>
     <string name="common_month">月</string>
     <string name="common_day">日</string>
@@ -80,7 +82,6 @@
     <string name="register_succeed">注册成功</string>
 
 
-
     <!-- 我的 -->
     <string name="my_coupon">优惠券</string>
     <string name="my_collect">收藏</string>
@@ -100,10 +101,31 @@
     <string name="my_tojudge">待评价</string>
     <string name="my_toservice">去售后</string>
 
+    <string name="my_address_title">收获地址</string>
+    <string name="my_address_edit">编辑地址</string>
+    <string name="my_address_name">姓名</string>
+    <string name="my_address_phone">电话</string>
+    <string name="my_address_localtion">地区</string>
+    <string name="my_address_detail">详细地址</string>
+    <string name="my_address_default">设为默认收获地址</string>
+    <string name="my_address_name_hint">收货人姓名</string>
+    <string name="my_address_phone_hint">收货人手机好</string>
+    <string name="my_address_localtion_hint">选择省/市／区</string>
+    <string name="my_address_detail_hint">街道门牌、楼层房间号等信息</string>
+    <string name="my_address_name_tip">请输入收货人姓名</string>
+    <string name="my_address_phone_tip">请输入收货人手机好</string>
+    <string name="my_address_localtion_tip">请选择省/市／区</string>
+    <string name="my_address_detail_tip">请输入街道门牌、楼层房间号等信息</string>
+
     <!-- 购物车 -->
     <string name="cart_tip1">30天无忧退货</string>
     <string name="cart_tip2">48小时快速退款</string>
     <string name="cart_tip3">满88元免邮费</string>
+
+
+    <!-- 地区对话框 -->
+    <string name="address_title">请选择地区</string>
+    <string name="address_hint">请选择</string>
 
 
 </resources>
