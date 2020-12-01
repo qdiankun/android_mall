@@ -3,7 +3,8 @@ package com.me.slone.mall.http.response.goods;
 /**
  * Author：diankun
  * Time：20-11-2 上午11:22
- * Description:
+ * Description:r
+ *
  */
 public class CouponBean {
 

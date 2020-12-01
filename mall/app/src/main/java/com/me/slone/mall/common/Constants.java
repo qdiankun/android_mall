@@ -20,4 +20,8 @@ public class Constants {
     public static final int RESULT_ADDRESS_ADD = 1002;
     public static final int RESULT_ADDRESS_UPDATE = 1003;
 
+    public static final int COUPON_STATUS_UNUSERD = 0;
+    public static final int COUPON_STATUS_USED = 1;
+    public static final int COUPON_STATUS_EXPIRED = 2;
+
 }

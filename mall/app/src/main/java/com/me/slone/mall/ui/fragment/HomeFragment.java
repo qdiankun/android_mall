@@ -22,6 +22,7 @@ import com.me.slone.mall.R;
 import com.me.slone.mall.common.MyFragment;
 import com.me.slone.mall.http.glide.GlideApp;
 import com.me.slone.mall.http.model.HttpData;
+import com.me.slone.mall.http.request.CouponReceiveApi;
 import com.me.slone.mall.http.request.HomeApi;
 import com.me.slone.mall.http.response.goods.BannerBean;
 import com.me.slone.mall.http.response.goods.BrandBean;
@@ -122,7 +123,8 @@ public class HomeFragment extends MyFragment<HomeActivity> {
         mCouponAdapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView recyclerView, View itemView, int position) {
-                ToastUtils.show(mCouponList.get(position).getName());
+                //ToastUtils.show(mCouponList.get(position).getName());
+                receiveCoupon(mCouponList.get(position));
             }
         });
         mCouponRv.addItemDecoration(getVerticalWhiteDividerItem());
@@ -188,6 +190,22 @@ public class HomeFragment extends MyFragment<HomeActivity> {
         mFloorRv.setAdapter(mFloorAdapter);
 
 
+    }
+
+    /**
+     * 领取优惠券
+     * @param couponBean
+     */
+    private void receiveCoupon(CouponBean couponBean) {
+        EasyHttp.post(this)
+                .api(new CouponReceiveApi()
+                .setCouponId(couponBean.getId()))
+                .request(new HttpCallback<HttpData<Void>>(this){
+                    @Override
+                    public void onSucceed(HttpData<Void> result) {
+                        getHomeData();
+                    }
+                });
     }
 
     private void jumpGoodsDetail(int goodId) {

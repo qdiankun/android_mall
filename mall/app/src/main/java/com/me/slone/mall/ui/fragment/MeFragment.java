@@ -14,6 +14,7 @@ import com.me.slone.mall.http.model.HttpData;
 import com.me.slone.mall.http.request.UserInfoApi;
 import com.me.slone.mall.http.response.me.UserInfo;
 import com.me.slone.mall.ui.activity.AddressListActivity;
+import com.me.slone.mall.ui.activity.CouponListActivity;
 import com.me.slone.mall.ui.activity.HomeActivity;
 
 /**
@@ -25,7 +26,7 @@ public class MeFragment extends MyFragment<HomeActivity> {
 
     private ImageView mAvatarIv;
     private TextView mNickTv;
-    private SettingBar mAddressSb;
+    private SettingBar mAddressSb,mCouponSb;
 
     public static MeFragment newInstance() {
         return new MeFragment();
@@ -41,12 +42,13 @@ public class MeFragment extends MyFragment<HomeActivity> {
         mAvatarIv = findViewById(R.id.iv_avatar);
         mNickTv = findViewById(R.id.tv_nickname);
         mAddressSb = findViewById(R.id.sb_setting_address);
+        mCouponSb = findViewById(R.id.sb_setting_coupon);
         mNickTv.setText("昵称");
         GlideApp.with(getContext())
                 .load(R.drawable.ic_shop)
                 .circleCrop()
                 .into(mAvatarIv);
-        setOnClickListener(mAddressSb);
+        setOnClickListener(mAddressSb,mCouponSb);
     }
 
     @Override
@@ -84,6 +86,8 @@ public class MeFragment extends MyFragment<HomeActivity> {
     public void onClick(View v) {
         if (v == mAddressSb) {
             startActivity(AddressListActivity.class);
+        } else if(v == mCouponSb){
+            startActivity(CouponListActivity.class);
         }
     }
 }
