@@ -1,5 +1,6 @@
 package com.me.slone.mall.ui.activity;
 
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +11,7 @@ import com.me.slone.mall.R;
 import com.me.slone.mall.common.MyActivity;
 import com.me.slone.mall.http.model.HttpData;
 import com.me.slone.mall.http.request.CheckoutApi;
+import com.me.slone.mall.http.request.OrderSubmit;
 import com.me.slone.mall.http.response.cart.CheckedAddress;
 import com.me.slone.mall.http.response.cart.CheckedBean;
 import com.me.slone.mall.http.response.cart.CheckedGoodsBean;
@@ -21,7 +23,7 @@ import java.util.List;
 public class CheckoutActivity extends MyActivity {
 
     private TextView mAddressNameTv, mAddressDetailTv, mCouponTv, mTotalPrice;
-    private TextView mostAgeTv, mCouponPriceTv,mRealPrice;
+    private TextView mostAgeTv, mCouponPriceTv, mRealPrice, mTakeOrderTv;
     private CheckedBean mCheckedBean;
     private RecyclerView mCheckedRv;
     private CheckListAdapter mCheckListAdapter;
@@ -42,7 +44,9 @@ public class CheckoutActivity extends MyActivity {
         mTotalPrice = findViewById(R.id.tv_totoalprice);
         mostAgeTv = findViewById(R.id.tv_postage);
         mCouponPriceTv = findViewById(R.id.tv_coupon_price);
-        mRealPrice= findViewById(R.id.tv_realprice);
+        mRealPrice = findViewById(R.id.tv_realprice);
+        mTakeOrderTv = findViewById(R.id.tv_take_order);
+        setOnClickListener(mTakeOrderTv);
         mCheckListAdapter = new CheckListAdapter(this);
         mCheckListAdapter.setData(mList);
         mCheckedRv.setAdapter(mCheckListAdapter);
@@ -76,7 +80,7 @@ public class CheckoutActivity extends MyActivity {
         mTotalPrice.setText("¥" + mCheckedBean.getGoodsTotalPrice());
         mostAgeTv.setText("¥" + mCheckedBean.getFreightPrice());
         mCouponPriceTv.setText("-¥" + mCheckedBean.getCouponPrice());
-        mRealPrice.setText("¥"+mCheckedBean.getActualPrice());
+        mRealPrice.setText("¥" + mCheckedBean.getActualPrice());
     }
 
     private void refreshGoods() {
@@ -107,4 +111,27 @@ public class CheckoutActivity extends MyActivity {
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        if (mTakeOrderTv == v) {
+            submitOrder();
+        }
+    }
+
+    private void submitOrder() {
+        EasyHttp.post(this)
+                .api(new OrderSubmit()
+                        .setAddressId(mCheckedBean.getCheckedAddress().getId())
+                        .setCouponId(mCheckedBean.getCouponId())
+                        .setCartId(mCheckedBean.getCartId())
+                        .setUserCouponId(mCheckedBean.getUserCouponId())
+                        .setGrouponRulesId(mCheckedBean.getGrouponRulesId())
+                )
+                .request(new HttpCallback<HttpData<Void>>(this) {
+                    @Override
+                    public void onSucceed(HttpData<Void> result) {
+                        super.onSucceed(result);
+                    }
+                });
+    }
 }

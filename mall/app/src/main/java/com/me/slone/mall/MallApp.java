@@ -20,6 +20,7 @@ import com.hjq.toast.ToastUtils;
 import com.me.slone.mall.common.Constants;
 import com.me.slone.mall.common.UserConstants;
 import com.me.slone.mall.http.model.RequestHandler;
+import com.me.slone.mall.http.server.ReleaseServer;
 import com.me.slone.mall.http.server.TestServer;
 import com.me.slone.mall.other.AppConfig;
 import com.me.slone.mall.other.CrashHandler;
@@ -59,7 +60,7 @@ public class MallApp extends Application {
         if (AppConfig.isDebug()) {
             server = new TestServer();
         } else {
-            server = new TestServer();
+            server = new ReleaseServer();
         }
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .build();
