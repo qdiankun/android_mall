@@ -2,10 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.me.slone.mall">
     <!-- 访问网络状态 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <application
         android:name=".MallApp"
         android:allowBackup="true"
@@ -37,13 +33,22 @@
         <activity
             android:name=".ui.activity.CategoryListActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.activity.CouponListActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.AddressActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.AddressListActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.activity.CouponListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.AddressActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.AddressListActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.CheckoutActivity"
+            android:screenOrientation="portrait"
+            />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
 </manifest>

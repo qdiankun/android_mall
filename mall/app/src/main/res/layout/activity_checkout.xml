@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/main_bg"
+    tools:context=".ui.activity.CheckoutActivity">
+
+    <com.hjq.bar.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:backButton="true"
+        app:lineVisible="false"
+        app:title="@string/home_nav_car" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/sp_14"
+                            android:textColor="@color/black"
+                            android:text="收货地址"/>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:src="@drawable/ic_right_arrow"/>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tv_address_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_989DA7"
+                        android:textSize="@dimen/sp_13"
+                        tools:text="张三  15262737896"/>
+
+                    <TextView
+                        android:id="@+id/tv_address_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/color_989DA7"
+                        android:textSize="@dimen/sp_13"
+                        tools:text="123"/>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/ll_coupon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/dp_14"
+                        android:textColor="@color/black"
+                        android:text="@string/my_coupon"/>
+
+
+                    <ImageView
+                        android:id="@+id/iv_coupon_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/ic_right_arrow"/>
+
+                    <TextView
+                        android:id="@+id/tv_coupon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/iv_coupon_arrow"
+                        android:textColor="@color/color_989DA7"
+                        android:textSize="@dimen/sp_13"
+                        tools:text="-¥50.00元"/>
+
+                </RelativeLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_checked"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="@dimen/dp_10"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/dp_14"
+                        android:textColor="@color/black"
+                        android:text="@string/my_check_goodcount"/>
+
+
+                    <TextView
+                        android:id="@+id/tv_totoalprice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/color_F8002A"
+                        android:textSize="@dimen/sp_13"
+                        tools:text="¥3127.00"/>
+
+                </RelativeLayout>
+
+                <View style="@style/HorizontalLineStyle" />
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="@dimen/dp_10"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/dp_14"
+                        android:textColor="@color/black"
+                        android:text="@string/my_check_postage"/>
+
+
+                    <TextView
+                        android:id="@+id/tv_postage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/color_F8002A"
+                        android:textSize="@dimen/sp_13"
+                        tools:text="¥0.00"/>
+
+                </RelativeLayout>
+
+                <View style="@style/HorizontalLineStyle" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="@dimen/dp_10"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/dp_14"
+                        android:textColor="@color/black"
+                        android:text="@string/my_coupon"/>
+
+
+                    <TextView
+                        android:id="@+id/tv_coupon_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/color_F8002A"
+                        android:textSize="@dimen/sp_13"
+                        tools:text="-¥50.00"/>
+
+                </RelativeLayout>
+
+                <View style="@style/HorizontalLineStyle" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:padding="@dimen/dp_10"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:id="@+id/tv_tip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/dp_14"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/black"
+                        android:text="@string/my_check_tips"/>
+
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_toRightOf="@id/tv_tip"
+                        android:gravity="center_vertical"
+                        style="@style/EditTextStyle"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="@dimen/dp_10"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/sp_13"
+                        android:hint="@string/my_check_tips"
+                        />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <RelativeLayout
+            android:id="@+id/rl_order"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginBottom="@dimen/dp_10">
+
+            <TextView
+                android:id="@+id/tv_take_order"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/white"
+                android:layout_margin="@dimen/dp_5"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_20"
+                android:paddingRight="@dimen/dp_20"
+                android:background="@color/color_c62828"
+                android:textSize="@dimen/sp_16"
+                android:text="提交下单"/>
+
+            <TextView
+                android:id="@+id/tv_realprice"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@id/tv_take_order"
+                android:textColor="@color/black"
+                android:layout_margin="@dimen/dp_5"
+                android:gravity="center"
+                android:textSize="@dimen/sp_16"
+                tools:text="¥3127.00"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toLeftOf="@id/tv_realprice"
+                android:textColor="@color/black"
+                android:layout_margin="@dimen/dp_5"
+                android:gravity="center"
+                android:textSize="@dimen/sp_16"
+                android:text="总计"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

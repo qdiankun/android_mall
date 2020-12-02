@@ -22,6 +22,7 @@ import com.me.slone.mall.http.request.CartListApi;
 import com.me.slone.mall.http.request.CartUpdateApi;
 import com.me.slone.mall.http.response.cart.CartBean;
 import com.me.slone.mall.http.response.cart.CartListBean;
+import com.me.slone.mall.ui.activity.CheckoutActivity;
 import com.me.slone.mall.ui.activity.HomeActivity;
 import com.me.slone.mall.ui.activity.LoginActivity;
 import com.me.slone.mall.ui.adapter.CartListAdapter;
@@ -260,6 +261,8 @@ public class CarFragment extends MyFragment<HomeActivity> {
             startActivity(LoginActivity.class);
         } else if (mDeleteTv == v) {
             deleteAllCheck();
+        } else if (mOrderTv == v) {
+            startActivity(CheckoutActivity.class);
         }
     }
 

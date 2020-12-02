@@ -123,6 +123,10 @@
 
     <string name="my_coupon_title">我的优惠券</string>
 
+    <string name="my_check_goodcount">商品金额</string>
+    <string name="my_check_postage">邮费</string>
+    <string name="my_check_tips">订单备注</string>
+
     <!-- 购物车 -->
     <string name="cart_tip1">30天无忧退货</string>
     <string name="cart_tip2">48小时快速退款</string>
