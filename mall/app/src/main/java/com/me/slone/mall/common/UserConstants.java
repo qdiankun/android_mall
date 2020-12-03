@@ -2,6 +2,8 @@ package com.me.slone.mall.common;
 
 import android.text.TextUtils;
 
+import com.blankj.utilcode.util.SPUtils;
+
 /**
  * Author：diankun
  * Time：20-11-16 上午10:46
@@ -32,6 +34,8 @@ public class UserConstants {
         token = "";
         phone = "";
         userName = "";
+
+        SPUtils.getInstance().remove(Constants.SP_KEY_TOKEN);
     }
 
     public static boolean isLogin(){

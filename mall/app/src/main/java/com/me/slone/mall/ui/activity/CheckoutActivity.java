@@ -1,6 +1,9 @@
 package com.me.slone.mall.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +19,7 @@ import com.me.slone.mall.http.response.cart.CheckedAddress;
 import com.me.slone.mall.http.response.cart.CheckedBean;
 import com.me.slone.mall.http.response.cart.CheckedGoodsBean;
 import com.me.slone.mall.ui.adapter.CheckListAdapter;
+import com.me.slone.mall.ui.dialog.CouponSheetDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +30,8 @@ public class CheckoutActivity extends MyActivity {
     private TextView mostAgeTv, mCouponPriceTv, mRealPrice, mTakeOrderTv;
     private CheckedBean mCheckedBean;
     private RecyclerView mCheckedRv;
+    private LinearLayout mAddressLl;
+    private RelativeLayout mCouponRl;
     private CheckListAdapter mCheckListAdapter;
     private List<CheckedGoodsBean> mList = new ArrayList<>();
 
@@ -34,6 +40,7 @@ public class CheckoutActivity extends MyActivity {
         return R.layout.activity_checkout;
     }
 
+    @SuppressLint("WrongViewCast")
     @Override
 
     protected void initView() {
@@ -46,7 +53,9 @@ public class CheckoutActivity extends MyActivity {
         mCouponPriceTv = findViewById(R.id.tv_coupon_price);
         mRealPrice = findViewById(R.id.tv_realprice);
         mTakeOrderTv = findViewById(R.id.tv_take_order);
-        setOnClickListener(mTakeOrderTv);
+        mAddressLl = findViewById(R.id.ll_address);
+        mCouponRl = findViewById(R.id.ll_coupon);
+        setOnClickListener(mTakeOrderTv, mAddressLl, mCouponRl);
         mCheckListAdapter = new CheckListAdapter(this);
         mCheckListAdapter.setData(mList);
         mCheckedRv.setAdapter(mCheckListAdapter);
@@ -58,8 +67,14 @@ public class CheckoutActivity extends MyActivity {
     }
 
     private void getCheckout() {
+        getCheckout(0, 0);
+    }
+
+    private void getCheckout(int couponId, int userCouponId) {
         EasyHttp.get(this)
-                .api(new CheckoutApi())
+                .api(new CheckoutApi()
+                        .setCouponId(couponId)
+                        .setUserCouponId(userCouponId))
                 .request(new HttpCallback<HttpData<CheckedBean>>(this) {
                     @Override
                     public void onSucceed(HttpData<CheckedBean> result) {
@@ -115,7 +130,23 @@ public class CheckoutActivity extends MyActivity {
     public void onClick(View v) {
         if (mTakeOrderTv == v) {
             submitOrder();
+        } else if (mAddressLl == v) {
+
+        } else if (mCouponRl == v) {
+            shwoCouponDialog();
         }
+    }
+
+    private void shwoCouponDialog() {
+        CouponSheetDialog couponSheetDialog = CouponSheetDialog.getInstance(mCheckedBean.getCartId(),
+                mCheckedBean.getGrouponRulesId(), mCheckedBean.getUserCouponId());
+        couponSheetDialog.setOnCouponCheckListener(new CouponSheetDialog.onCouponCheckListener() {
+            @Override
+            public void couponCheck(int coupontId, int userCouponId) {
+                getCheckout(coupontId, userCouponId);
+            }
+        });
+        couponSheetDialog.show(getSupportFragmentManager(), "couponsheetdialog");
     }
 
     private void submitOrder() {

@@ -286,6 +286,17 @@
                 app:bar_leftIcon="@drawable/ic_about"
                 app:bar_rightIcon="@drawable/ic_right_arrow" />
 
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_logout"
+                style="@style/ButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="40dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/button_save_selector"
+                android:text="@string/logout_text" />
+
         </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

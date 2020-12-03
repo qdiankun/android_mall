@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dp_100"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/coupon_item_selector"
+    android:layout_margin="@dimen/dp_5"
+    android:orientation="horizontal">
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.5"
+        android:gravity="center"
+        android:orientation="vertical"
+       >
+
+        <TextView
+            android:id="@+id/tv_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/color_E4363F"
+            android:visibility="visible"
+            android:textSize="@dimen/sp_22"
+            android:layout_gravity="center_horizontal"
+            tools:text="¥ 10 元"/>
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/color_989DA7"
+            android:visibility="visible"
+            android:textSize="@dimen/sp_13"
+            android:layout_gravity="center_horizontal"
+            tools:text="全场通用 - 无限制"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black"
+            android:visibility="visible"
+            android:textSize="@dimen/sp_20"
+            android:layout_gravity="center_horizontal"
+            tools:text="新用户优惠券"/>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/color_989DA7"
+            android:visibility="visible"
+            android:textSize="@dimen/sp_13"
+            android:layout_gravity="center_horizontal"
+            tools:text="有效期: 至 2020-11-07 16:44:56"/>
+
+    </LinearLayout>
+
+</LinearLayout>

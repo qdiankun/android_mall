@@ -72,6 +72,7 @@
     <string name="login_text">登录</string>
     <string name="login_other">其他登录方式</string>
     <string name="login_not">还没有登录</string>
+    <string name="logout_text">退出登录</string>
 
 
     <!-- 注册 -->
