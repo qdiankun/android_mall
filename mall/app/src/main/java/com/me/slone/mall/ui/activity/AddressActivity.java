@@ -63,6 +63,9 @@ public class AddressActivity extends MyActivity {
 
     @Override
     protected void initData() {
+        if(getIntent().getExtras() == null){
+            return;
+        }
         mAddressBean = (AddressBean) getIntent().getExtras().get(ARG_ADDRESS);
         if (mAddressBean != null) {
             mNameEt.setText(mAddressBean.getName());

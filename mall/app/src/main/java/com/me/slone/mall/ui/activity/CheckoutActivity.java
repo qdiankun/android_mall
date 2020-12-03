@@ -19,6 +19,7 @@ import com.me.slone.mall.http.response.cart.CheckedAddress;
 import com.me.slone.mall.http.response.cart.CheckedBean;
 import com.me.slone.mall.http.response.cart.CheckedGoodsBean;
 import com.me.slone.mall.ui.adapter.CheckListAdapter;
+import com.me.slone.mall.ui.dialog.AddressSheetDialog;
 import com.me.slone.mall.ui.dialog.CouponSheetDialog;
 
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ public class CheckoutActivity extends MyActivity {
     private RelativeLayout mCouponRl;
     private CheckListAdapter mCheckListAdapter;
     private List<CheckedGoodsBean> mList = new ArrayList<>();
+    private int mCoupontId, mUserCouponId, mAddressId;
 
     @Override
     protected int getLayoutId() {
@@ -66,15 +68,14 @@ public class CheckoutActivity extends MyActivity {
         getCheckout();
     }
 
-    private void getCheckout() {
-        getCheckout(0, 0);
-    }
 
-    private void getCheckout(int couponId, int userCouponId) {
+
+    private void getCheckout() {
         EasyHttp.get(this)
                 .api(new CheckoutApi()
-                        .setCouponId(couponId)
-                        .setUserCouponId(userCouponId))
+                        .setCouponId(mCoupontId)
+                        .setUserCouponId(mUserCouponId)
+                        .setAddressId(mAddressId))
                 .request(new HttpCallback<HttpData<CheckedBean>>(this) {
                     @Override
                     public void onSucceed(HttpData<CheckedBean> result) {
@@ -131,20 +132,28 @@ public class CheckoutActivity extends MyActivity {
         if (mTakeOrderTv == v) {
             submitOrder();
         } else if (mAddressLl == v) {
-
+            showAddressDialog();
         } else if (mCouponRl == v) {
             shwoCouponDialog();
         }
     }
 
+    private void showAddressDialog() {
+        AddressSheetDialog addressSheetDialog = AddressSheetDialog.getInstance(mCheckedBean.getAddressId());
+        addressSheetDialog.setmOnAddressClickListener(addressId -> {
+            mAddressId = addressId;
+            getCheckout();
+        });
+        addressSheetDialog.show(getSupportFragmentManager(), "addresssheetdialog");
+    }
+
     private void shwoCouponDialog() {
         CouponSheetDialog couponSheetDialog = CouponSheetDialog.getInstance(mCheckedBean.getCartId(),
                 mCheckedBean.getGrouponRulesId(), mCheckedBean.getUserCouponId());
-        couponSheetDialog.setOnCouponCheckListener(new CouponSheetDialog.onCouponCheckListener() {
-            @Override
-            public void couponCheck(int coupontId, int userCouponId) {
-                getCheckout(coupontId, userCouponId);
-            }
+        couponSheetDialog.setOnCouponCheckListener((coupontId, userCouponId) -> {
+            mCoupontId = coupontId;
+            mUserCouponId = userCouponId;
+            getCheckout();
         });
         couponSheetDialog.show(getSupportFragmentManager(), "couponsheetdialog");
     }
