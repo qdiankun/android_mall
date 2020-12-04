@@ -20,6 +20,7 @@ import com.me.slone.mall.ui.activity.AddressListActivity;
 import com.me.slone.mall.ui.activity.CouponListActivity;
 import com.me.slone.mall.ui.activity.HomeActivity;
 import com.me.slone.mall.ui.activity.LoginActivity;
+import com.me.slone.mall.ui.activity.OrderActivity;
 
 /**
  * Author：diankun
@@ -30,7 +31,7 @@ public class MeFragment extends MyFragment<HomeActivity> {
 
     private ImageView mAvatarIv;
     private TextView mNickTv;
-    private SettingBar mAddressSb,mCouponSb;
+    private SettingBar mAddressSb, mCouponSb, mOrderSb;
     private Button mLogoutBtn;
 
     public static MeFragment newInstance() {
@@ -48,13 +49,14 @@ public class MeFragment extends MyFragment<HomeActivity> {
         mNickTv = findViewById(R.id.tv_nickname);
         mAddressSb = findViewById(R.id.sb_setting_address);
         mCouponSb = findViewById(R.id.sb_setting_coupon);
+        mOrderSb = findViewById(R.id.sb_order_list);
         mLogoutBtn = findViewById(R.id.btn_logout);
         mNickTv.setText("昵称");
         GlideApp.with(getContext())
                 .load(R.drawable.ic_shop)
                 .circleCrop()
                 .into(mAvatarIv);
-        setOnClickListener(mAddressSb,mCouponSb,mLogoutBtn);
+        setOnClickListener(mAddressSb, mCouponSb, mLogoutBtn, mOrderSb);
     }
 
     @Override
@@ -92,17 +94,19 @@ public class MeFragment extends MyFragment<HomeActivity> {
     public void onClick(View v) {
         if (v == mAddressSb) {
             startActivity(AddressListActivity.class);
-        } else if(v == mCouponSb){
+        } else if (v == mCouponSb) {
             startActivity(CouponListActivity.class);
-        } else if(v == mLogoutBtn){
+        } else if (v == mLogoutBtn) {
             logout();
+        } else if (v == mOrderSb) {
+            startActivity(OrderActivity.class);
         }
     }
 
     private void logout() {
         EasyHttp.post(this)
                 .api(new LogoutApi())
-                .request(new HttpCallback<HttpData<Void>>(this){
+                .request(new HttpCallback<HttpData<Void>>(this) {
                     @Override
                     public void onSucceed(HttpData<Void> result) {
                         super.onSucceed(result);

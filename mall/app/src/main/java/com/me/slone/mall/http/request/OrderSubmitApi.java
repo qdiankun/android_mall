@@ -7,7 +7,7 @@ import com.hjq.http.config.IRequestApi;
  * Time：20-12-2 下午1:55
  * Description: 提交订单
  */
-public class OrderSubmit implements IRequestApi {
+public class OrderSubmitApi implements IRequestApi {
 
     /**
      * { cartId：xxx, addressId: xxx, couponId: xxx, message: xxx, grouponRulesId: xxx,  grouponLinkId: xxx,userCouponId}
@@ -25,37 +25,37 @@ public class OrderSubmit implements IRequestApi {
         return "order/submit";
     }
 
-    public OrderSubmit setCartId(int cartId) {
+    public OrderSubmitApi setCartId(int cartId) {
         this.cartId = cartId;
         return this;
     }
 
-    public OrderSubmit setAddressId(int addressId) {
+    public OrderSubmitApi setAddressId(int addressId) {
         this.addressId = addressId;
         return this;
     }
 
-    public OrderSubmit setCouponId(int couponId) {
+    public OrderSubmitApi setCouponId(int couponId) {
         this.couponId = couponId;
         return this;
     }
 
-    public OrderSubmit setMessage(String message) {
+    public OrderSubmitApi setMessage(String message) {
         this.message = message;
         return this;
     }
 
-    public OrderSubmit setGrouponRulesId(int grouponRulesId) {
+    public OrderSubmitApi setGrouponRulesId(int grouponRulesId) {
         this.grouponRulesId = grouponRulesId;
         return this;
     }
 
-    public OrderSubmit setGrouponLinkId(int grouponLinkId) {
+    public OrderSubmitApi setGrouponLinkId(int grouponLinkId) {
         this.grouponLinkId = grouponLinkId;
         return this;
     }
 
-    public OrderSubmit setUserCouponId(int userCouponId) {
+    public OrderSubmitApi setUserCouponId(int userCouponId) {
         this.userCouponId = userCouponId;
         return this;
     }

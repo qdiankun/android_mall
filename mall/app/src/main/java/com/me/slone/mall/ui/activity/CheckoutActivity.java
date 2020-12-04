@@ -14,7 +14,7 @@ import com.me.slone.mall.R;
 import com.me.slone.mall.common.MyActivity;
 import com.me.slone.mall.http.model.HttpData;
 import com.me.slone.mall.http.request.CheckoutApi;
-import com.me.slone.mall.http.request.OrderSubmit;
+import com.me.slone.mall.http.request.OrderSubmitApi;
 import com.me.slone.mall.http.response.cart.CheckedAddress;
 import com.me.slone.mall.http.response.cart.CheckedBean;
 import com.me.slone.mall.http.response.cart.CheckedGoodsBean;
@@ -160,7 +160,7 @@ public class CheckoutActivity extends MyActivity {
 
     private void submitOrder() {
         EasyHttp.post(this)
-                .api(new OrderSubmit()
+                .api(new OrderSubmitApi()
                         .setAddressId(mCheckedBean.getCheckedAddress().getId())
                         .setCouponId(mCheckedBean.getCouponId())
                         .setCartId(mCheckedBean.getCartId())

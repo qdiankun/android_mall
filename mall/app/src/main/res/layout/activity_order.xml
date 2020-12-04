@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical"
+    tools:context=".ui.activity.OrderActivity">
+
+    <com.hjq.bar.TitleBar
+        android:id="@+id/titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:backButton="true"
+        app:lineVisible="true"
+        app:title="@string/my_orders" />
+
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/stl_category_list"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_48"
+        android:background="@color/white"
+        app:tl_textAllCaps="false"
+        android:visibility="gone"
+        app:tl_textBold="BOTH"
+        app:tl_textsize="@dimen/sp_14"
+        app:tl_textSelectColor="@color/shallow_green"
+        app:tl_textUnselectColor="@color/black"/>
+
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/stl_orderlist"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        app:tl_indicator_color="@color/color_F8002A"
+        app:tl_indicator_height="@dimen/dp_3"
+        app:tl_indicator_width_equal_title="true"
+        app:tl_tab_padding="22dp"
+        app:tl_textSelectColor="#000000"
+        app:tl_textUnselectColor="#66000000"
+        app:tl_underline_color="#1A000000"
+        app:tl_underline_height="0dp"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_order_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white" />
+
+
+</LinearLayout>

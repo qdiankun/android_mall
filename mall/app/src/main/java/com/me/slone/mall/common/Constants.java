@@ -24,4 +24,17 @@ public class Constants {
     public static final int COUPON_STATUS_USED = 1;
     public static final int COUPON_STATUS_EXPIRED = 2;
 
+    /**
+     *                 0，全部订单；
+     *                 1，待付款；
+     *                 2，待发货；
+     *                 3，待收货；
+     *                 4，待评价。
+     */
+    public static final int ORDER_ALL = 0;
+    public static final int ORDER_TOPAY = 1;
+    public static final int ORDER_TOSEND = 2;
+    public static final int ORDER_TORECEIVE = 3;
+    public static final int ORDER_TOJUDGE = 4;
+
 }

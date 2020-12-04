@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:id="@+id/ll_floor"
+    android:background="@color/main_bg">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp">
+
+        <TextView
+            android:id="@+id/tv_order_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:textSize="@dimen/sp_18"
+            android:layout_marginLeft="@dimen/dp_10"
+            tools:text="订单编号:00001111"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/sp_18"
+            android:textColor="@color/color_F8002A"
+            android:layout_marginRight="@dimen/dp_10"
+            tools:text="未付款"/>
+
+    </RelativeLayout>
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_floor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/white"
+        />
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:gravity="right"
+        android:textSize="@dimen/sp_18"
+        android:background="@color/white"
+        android:layout_marginRight="@dimen/dp_10"
+        tools:text="合计: ¥2697.00（含运费）"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btn_order_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:gravity="center"
+            android:textSize="@dimen/sp_18"
+            android:textColor="@color/white"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/button_save_selector"
+            android:text="去支付"/>
+
+        <Button
+            android:id="@+id/btn_order_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:gravity="center"
+            android:textSize="@dimen/sp_18"
+            android:layout_marginRight="@dimen/dp_12"
+            android:background="@color/white"
+            android:layout_toLeftOf="@id/btn_order_pay"
+            android:text="取消订单"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

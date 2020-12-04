@@ -161,4 +161,8 @@ dependencies {
     implementation 'com.contrarywind:Android-PickerView:4.1.9'
     implementation 'com.github.ljphawk:SwipeMenuLayout:1.05'
 
+    //easypay
+    implementation 'com.xgr.easypay:EasyPay:2.0.5'   // 基类库，必选
+    implementation 'com.xgr.easypay:wechatpay:2.0.5' // 微信支付，可选
+
 }
