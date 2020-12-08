@@ -25,7 +25,6 @@
         android:background="@color/white"
         />
 
-
     <TextView
         android:id="@+id/tv_more"
         android:layout_width="match_parent"

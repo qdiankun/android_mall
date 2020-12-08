@@ -43,6 +43,13 @@
     <!-- 按钮禁用时的颜色 -->
     <color name="colorButtonDisable">#BBBBBB</color>
 
+    <!-- pay -->
+    <color name="colorPayNormal">#FE4363</color>
+    <color name="colorPayPressed">#F8002A</color>
+    <!-- cancel -->
+    <color name="colorPayCancelNormal">#F5F5F5</color>
+    <color name="colorPayCancelPressed">#e6e6e6</color>
+
     <!-- 对话框确认按钮文本颜色 -->
     <color name="colorConfirm">#007AFF</color>
     <!-- 对话框取消按钮文本颜色 -->
